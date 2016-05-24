@@ -1,20 +1,21 @@
 {
-	"apiVersion":"v1",
     "kind": "Service",
+	"apiVersion":"v1",
     "metadata" : { 
         "name": "webserver-service"
     },  
-    "type" : "ClusterIP",
     "spec" : { 
         "selector": {
             "app": "webserver"
         },  
         "ports" : [ 
             {   
+				"name": "http",
                 "protocol": "TCP",
                 "port": 8001,
                 "targetPort": 80  
             }   
-        ]   
+        ],
+		"type": "LoadBalancer"	
     }   
 }
