@@ -1,4 +1,5 @@
 :<<doc
+创建monitor*文件
 与monitor_start.sh文件不同之处在于，这里是以2S为时间间隔
 doc
 
