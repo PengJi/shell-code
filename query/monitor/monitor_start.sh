@@ -1,3 +1,7 @@
+:<<doc
+创建monitor*文件
+doc
+
 echo -e "\033[33;49;1m [JPDB2 start] \033[39;49;0m"
 
 ssh gpadmin@JPDB2 << eof
