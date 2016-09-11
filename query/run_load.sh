@@ -99,5 +99,5 @@ done
 mv /tmp/monitor.txt /tmp/monitor1.txt /tmp/monitor2.txt /tmp/monitor3.txt /tmp/monitor4.txt /tmp/monitor5.txt /tmp/monitor6.txt ./rec_load
 
 # 操作完成
-echo `date`" Operation Complete" >> run,log
+echo `date`" Operation Complete" >> run.log
 echo -e "\033[32;49;1m [Operation Complete] \033[39;49;0m"
