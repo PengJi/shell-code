@@ -88,7 +88,7 @@ echo `date`" scp files" >> run.log
 echo -e "\033[32;49;1m [scp files] \033[39;49;0m"
 for k in $(seq 1 6)
 do
-echo `date`" node${k} scp}" >> run.log
+echo `date`" node${k} scp" >> run.log
 echo -e "\033[33;49;1m [node${k} scp] \033[39;49;0m"
 ssh gpadmin@node${k} << eof
 if [ -f "/tmp/monitor${k}.txt" ]; then
