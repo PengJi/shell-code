@@ -1,0 +1,44 @@
+echo -e "\033[33;49;1m [JPDB2 start] \033[39;49;0m"
+
+ssh gpadmin@JPDB2 << eof
+echo "******************************************************************************************************************************" >> /tmp/monitor.txt
+collectl -scmdn -oT >> /tmp/monitor.txt &
+eof
+
+echo -e "\033[33;49;1m [node1 start] \033[39;49;0m"
+ssh gpadmin@node1 << eof
+echo "******************************************************************************************************************************" >> /tmp/monitor1.txt
+collectl -scmdn -oT >> /tmp/monitor1.txt &
+eof
+
+echo -e "\033[33;49;1m [node2 start] \033[39;49;0m"
+ssh gpadmin@node2 << eof
+echo "******************************************************************************************************************************" >> /tmp/monitor2.txt
+collectl -scmdn -oT >> /tmp/monitor2.txt &
+eof
+
+echo -e "\033[33;49;1m [node3 start] \033[39;49;0m"
+ssh gpadmin@node3 << eof
+echo "******************************************************************************************************************************" >> /tmp/monitor3.txt
+collectl -scmdn -oT >> /tmp/monitor3.txt &
+eof
+
+echo -e "\033[33;49;1m [node4 start] \033[39;49;0m"
+ssh gpadmin@node4 << eof
+echo "******************************************************************************************************************************" >> /tmp/monitor4.txt
+collectl -scmdn -oT >> /tmp/monitor4.txt &
+eof
+
+echo -e "\033[33;49;1m [node5 astart] \033[39;49;0m"
+ssh gpadmin@node5 << eof
+echo "******************************************************************************************************************************" >> /tmp/monitor5.txt
+collectl -scmdn -oT >> /tmp/monitor5.txt &
+eof
+
+echo -e "\033[33;49;1m [node6 start] \033[39;49;0m"
+ssh gpadmin@node6 << eof
+echo "******************************************************************************************************************************" >> /tmp/monitor6.txt
+collectl -scmdn -oT >> /tmp/monitor6.txt &
+eof
+
+echo -e "\033[32;49;1m [monitor started] \033[39;49;0m"
