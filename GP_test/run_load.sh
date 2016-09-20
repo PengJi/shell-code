@@ -29,20 +29,8 @@ echo "neighbors size" >> ./rec_load/table_size.txt
 psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('neighbors'));" >> ./rec_load/table_size.txt
 
 # 汇总结果
-echo `date`" scp files" >> run.log
-echo -e "\033[32;49;1m [scp files] \033[39;49;0m"
-for k in $(seq 1 6)
-do
-echo `date`" node${k} scp" >> run.log
-echo -e "\033[33;49;1m [node${k} scp] \033[39;49;0m"
-ssh gpadmin@node${k} << eof
-if [ -f "/tmp/monitor${k}.txt" ]; then
-   scp -o StrictHostKeyChecking=no /tmp/monitor${k}.txt gpadmin@JPDB2:/tmp 
-fi
-eof
-done
-mv /tmp/monitor.txt /tmp/monitor1.txt /tmp/monitor2.txt /tmp/monitor3.txt /tmp/monitor4.txt /tmp/monitor5.txt /tmp/monitor6.txt ./rec_load
+colResFun ./rec_load
 
 # 操作完成
-echo `date`" Load Operation Complete" >> run.log
-echo -e "\033[32;49;1m [Load Operation Complete] \033[39;49;0m"
+echo `date`" Load Operation Completed" >> run.log
+echo -e "\033[32;49;1m [Load Operation Completed] \033[39;49;0m"
