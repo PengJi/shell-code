@@ -1,8 +1,8 @@
 :<<doc
 需要修改的参数：
 表名:    astronomy
-主节点名: JPDB2
-从节点名: node1/node2/node3/node4/node5/node6
+主节点名: JPDB1
+从节点名: worker1/worker2/worker3/worker4/worker5/worker6
 doc
 
 . ./funs.sh
@@ -23,9 +23,9 @@ echo `date`" scp files" >> run.log
 echo -e "\033[32;49;1m [scp files] \033[39;49;0m"
 for k in $(seq 1 6)
 do
-echo `date`" node${k} scp" >> run.log
-echo -e "\033[33;49;1m [node${k} scp] \033[39;49;0m"
-ssh gpadmin@node${k} << eof
+echo `date`" worker${k} scp" >> run.log
+echo -e "\033[33;49;1m [worker${k} scp] \033[39;49;0m"
+ssh gpadmin@worker${k} << eof
 if [ -f "/tmp/monitor${k}.txt" ]; then
    scp -o StrictHostKeyChecking=no /tmp/monitor${k}.txt gpadmin@JPDB2:/tmp 
 fi

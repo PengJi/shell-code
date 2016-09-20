@@ -22,7 +22,7 @@ cleanCacheFun jipeng1008
 echo `date`" start truncate tables" >> run.log
 echo -e "\033[32;49;1m [truncate tables] \033[39;49;0m"
 echo "[truncate tables]"
-psql -d astronomy -f "./sql/truncate.sql" >> run.log
+sh array.sh
 echo `date`" end truncate tables" >> run.log
 
 # 导入表

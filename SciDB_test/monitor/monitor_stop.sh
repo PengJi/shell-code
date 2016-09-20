@@ -1,11 +1,11 @@
 # stop collectl
-echo -e "\033[31;49;1m [JPDB2 stop] \033[39;49;0m"
+echo -e "\033[31;49;1m [JPDB1 stop] \033[39;49;0m"
 pgrep collectl | xargs kill -9  
 
 for k in $(seq 1 6)
 do
-echo -e "\033[31;49;1m [node${k} stop] \033[39;49;0m"
-ssh gpadmin@node${k} << eof
+echo -e "\033[31;49;1m [worker${k} stop] \033[39;49;0m"
+ssh gpadmin@worker${k} << eof
   pgrep collectl | xargs kill -9
 eof
 done

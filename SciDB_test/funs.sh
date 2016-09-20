@@ -36,9 +36,9 @@ exp
 
 for k in $(seq 1 6)
 do
-echo `date`" clear node${k} cache" >> run.log
+echo `date`" clear worker${k} cache" >> run.log
 expect << exp
-spawn ssh root@node${k}
+spawn ssh root@worker${k}
 expect "assword:"
 send "${passwd}\r"
 expect "#"
@@ -76,7 +76,7 @@ delLoadResFun(){
 
 for k in $(seq 1 6)
 do
-ssh gpadmin@node${k} << eof
+ssh gpadmin@worker${k} << eof
 if [ -f "/tmp/monitor${k}.txt" ]; then
     rm /tmp/monitor${k}.txt
 fi
@@ -106,7 +106,7 @@ delQueryResFun(){
 
 for k in $(seq 1 6)
 do
-ssh gpadmin@node${k} << eof
+ssh gpadmin@worker${k} << eof
     if [ -f "/tmp/monitor${k}.txt" ]; then
         rm /tmp/monitor${k}.txt
     fi
