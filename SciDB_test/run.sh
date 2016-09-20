@@ -11,48 +11,10 @@ echo `date`" program start" >> run.log
 echo -e "\033[32;49;1m [program start] \033[39;49;0m"
 
 # 创建目录
-echo `date`" mkdir" >> run.log
-echo -e "\033[32;49;1m [clear cache] \033[39;49;0m"
-if [ -d "./rec_load" ]; then
-    rm -rf ./rec_load
-    mkdir ./rec_load
-fi
-if [ -d "./rec_query" ]; then
-    rm -rf ./rec_query
-    mkdir ./rec_query
-fi
+createDirFun
 
-# 远程登录并清空缓存
-passwd="jipeng1008"
-echo `date`" start clear cache" >> run.log
-echo -e "\033[32;49;1m [clear cache] \033[39;49;0m"
-echo -e "\033[33;49;1m [input root's password] \033[39;49;0m"
-expect << exp
-spawn su
-expect "assword:"
-send "${passwd}\r"
-expect "#"
-send "sync\r"
-send "echo 1 > /proc/sys/vm/drop_caches\r"
-send  "exit\r"
-expect eof
-exp
-
-for k in $(seq 1 6)
-do
-echo `date`" clear node${k} cache" >> run.log
-expect << exp
-spawn ssh root@node${k}
-expect "assword:"
-send "${passwd}\r"
-expect "#"
-send "sync\r"
-send "echo 1 > /proc/sys/vm/drop_caches\r"
-send  "exit\r"
-expect eof
-exp
-done
-echo `date`" end clear cache" >> run.log
+# 
+cleanCacheFun jipeng1008
 
 # 清空表
 echo `date`" start truncate tables" >> run.log
