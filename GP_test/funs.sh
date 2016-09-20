@@ -5,7 +5,7 @@ doc
 # 清空集群中节点的缓存
 # passwd为各节点root的密码
 cleanCacheFun(){
-	passwd="jipeng1008"
+	passwd="$1"
 	echo `date`" start clear cache" >> run.log
 	echo -e "\033[32;49;1m [clear cache] \033[39;49;0m"
 	echo -e "\033[33;49;1m [input root's password] \033[39;49;0m"

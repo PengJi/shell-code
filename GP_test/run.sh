@@ -27,7 +27,7 @@ if [ -d "./rec_query" ]; then
 fi
 
 # 清空节点缓存缓存
-cleanCacheFun
+cleanCacheFun jipeng1008
 
 # 清空表
 truncateTableFun
