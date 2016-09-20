@@ -117,7 +117,7 @@ loadTable(){
     echo `date`" loading galaxylj" >> run.log
     echo -e "\033[32;49;1m [loading galaxylj] \033[39;49;0m"
     sleep 2
-    gpload -f /home/gpadmin/astronomy_data/10G/galaxylj"$1"_comma.yaml > ./rec_load/galaxylj.txt
+    gpload -f /home/gpadmin/astronomy_data/"$1"G/galaxylj"$1"_comma.yaml > ./rec_load/galaxylj.txt
     sleep 2
     sh ./monitor/monitor_stop.sh
 
@@ -126,7 +126,7 @@ loadTable(){
     echo `date`" loading photoobjall" >> run.log
     echo -e "\033[32;49;1m [loading photoobjall] \033[39;49;0m"
     sleep 2
-    gpload -f /home/gpadmin/astronomy_data/10G/photoobjall"$1"_comma.yaml > ./rec_load/photoobjall.txt
+    gpload -f /home/gpadmin/astronomy_data/"$1"G/photoobjall"$1"_comma.yaml > ./rec_load/photoobjall.txt
     sleep 2
     sh ./monitor/monitor_stop.sh
 
@@ -135,7 +135,7 @@ loadTable(){
     echo `date`" loading photoprimarylj" >> run.log
     echo -e "\033[32;49;1m [loading photoprimarylj] \033[39;49;0m"
     sleep 2
-    gpload -f /home/gpadmin/astronomy_data/10G/photoprimarylj"$1"_comma.yaml > ./rec_load/photoprimarylj.txt
+    gpload -f /home/gpadmin/astronomy_data/"$1"G/photoprimarylj"$1"_comma.yaml > ./rec_load/photoprimarylj.txt
     sleep 2
     sh ./monitor/monitor_stop.sh
 
@@ -144,7 +144,7 @@ loadTable(){
     echo `date`" loading starlj" >> run.log
     echo -e "\033[32;49;1m [loading starlj] \033[39;49;0m"
     sleep 2
-    gpload -f /home/gpadmin/astronomy_data/10G/starlj"$1"_comma.yaml > ./rec_load/starlj.txt
+    gpload -f /home/gpadmin/astronomy_data/"$1"G/starlj"$1"_comma.yaml > ./rec_load/starlj.txt
     sleep 2
     sh ./monitor/monitor_stop.sh
 
@@ -153,7 +153,7 @@ loadTable(){
     echo `date`" loading neighbors" >> run.log
     echo -e "\033[32;49;1m [loading neighbors] \033[39;49;0m"
     sleep 2
-    gpload -f /home/gpadmin/astronomy_data/10G/neighbors"$1"_comma.yaml > ./rec_load/neighbors.txt
+    gpload -f /home/gpadmin/astronomy_data/"$1"G/neighbors"$1"_comma.yaml > ./rec_load/neighbors.txt
     sleep 2
     sh ./monitor/monitor_stop.sh
 }
