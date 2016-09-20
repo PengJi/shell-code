@@ -6,6 +6,8 @@ todo
 自动删除结果文件
 doc
 
+. ./funs.sh
+
 # 程序启动
 echo `date`" program start" >> run.log
 echo -e "\033[32;49;1m [program start] \033[39;49;0m"
