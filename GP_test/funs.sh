@@ -7,7 +7,7 @@ doc
 # rec_query 存放查询结果
 createDirFun(){
 	echo `date`" mkdir" >> run.log
-	echo -e "\033[32;49;1m [clear cache] \033[39;49;0m"
+	echo -e "\033[32;49;1m [create dir] \033[39;49;0m"
 	if [ -d "./rec_load" ]; then
     	rm -rf ./rec_load
 	fi
