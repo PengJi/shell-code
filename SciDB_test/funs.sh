@@ -5,15 +5,14 @@ doc
 # 创建存放结果的目录
 createDirFun(){
 	echo `date`" mkdir" >> run.log
-	echo -e "\033[32;49;1m [clear cache] \033[39;49;0m"
 	if [ -d "./rec_load" ]; then
     	rm -rf ./rec_load
-	    mkdir ./rec_load
 	fi
 	if [ -d "./rec_query" ]; then
     	rm -rf ./rec_query
-	    mkdir ./rec_query
 	fi
+	mkdir ./rec_load
+	mkdir ./rec_query
 }
 
 # 清空集群中各个节点的缓存

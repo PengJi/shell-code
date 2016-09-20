@@ -15,7 +15,7 @@ echo -e "\033[32;49;1m [program start] \033[39;49;0m"
 # 创建目录
 createDirFun
 
-# 
+# 清空缓存
 cleanCacheFun jipeng1008
 
 # 清空表
