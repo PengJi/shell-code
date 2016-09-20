@@ -13,25 +13,9 @@ delLoadResFun
 # 导入10G表
 loadTable 10
 
-# 得到表的大小
-echo `date`" get table size" >> run.log
-echo -e "\033[32;49;1m [get table size] \033[39;49;0m"
-psql -d astronomy -f "./sql/table_size.sql" >> ./rec_load/table_size.txt
-
 # 汇总结果
-echo `date`" scp files" >> run.log
-echo -e "\033[32;49;1m [scp files] \033[39;49;0m"
-for k in $(seq 1 6)
-do
-echo `date`" worker${k} scp" >> run.log
-echo -e "\033[33;49;1m [worker${k} scp] \033[39;49;0m"
-ssh gpadmin@worker${k} << eof
-if [ -f "/tmp/monitor${k}.txt" ]; then
-   scp -o StrictHostKeyChecking=no /tmp/monitor${k}.txt gpadmin@JPDB2:/tmp 
-fi
-eof
-done
-mv /tmp/monitor.txt /tmp/monitor1.txt /tmp/monitor2.txt /tmp/monitor3.txt /tmp/monitor4.txt /tmp/monitor5.txt /tmp/monitor6.txt ./rec_load
+# 主节点scidb用户的密码
+colResFun scidb ./rec_load
 
 # 操作完成
 echo `date`" Load Operation Complete" >> run.log

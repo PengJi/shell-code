@@ -137,26 +137,8 @@ sleep 2
 sh ./monitor/monitor_stop.sh
 
 # 汇总结果
-# scp files
-echo `date`" scp files" >> run.log
-echo -e "\033[32;49;1m [scp files] \033[39;49;0m"
-
-for k in $(seq 1 6)
-do
-echo `date`" worker${k} scp" >> run.log
-echo -e "\033[33;49;1m [worker${k} scp] \033[39;49;0m"
-ssh gpadmin@worker${k} << eof
-if [ -f "/tmp/monitor${k}.txt" ]; then
-   scp -o StrictHostKeyChecking=no /tmp/monitor${k}.txt gpadmin@JPDB2:/tmp 
-fi
-eof
-done
-
-# 移动monitor文件
-echo `date`" moving monitor files" >> run.log
-echo -e "\033[32;49;1m [moving monitor files] \033[39;49;0m"
-mv /tmp/monitor.txt /tmp/monitor1.txt /tmp/monitor2.txt /tmp/monitor3.txt /tmp/monitor4.txt /tmp/monitor5.txt /tmp/monitor6.txt ./rec_query
+colResFun scidb ./rec_query
 
 # 执行完毕
-echo `date`" Operation Complete" >> run.log
-echo -e "\033[32;49;1m [Operation Complete] \033[39;49;0m"
+echo `date`" Query Operation Completed" >> run.log
+echo -e "\033[32;49;1m [Query Operation Completed] \033[39;49;0m"

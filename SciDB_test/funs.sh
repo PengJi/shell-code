@@ -76,7 +76,7 @@ delLoadResFun(){
 
 for k in $(seq 1 6)
 do
-ssh gpadmin@worker${k} << eof
+ssh scidb@worker${k} << eof
 if [ -f "/tmp/monitor${k}.txt" ]; then
     rm /tmp/monitor${k}.txt
 fi
@@ -106,7 +106,7 @@ delQueryResFun(){
 
 for k in $(seq 1 6)
 do
-ssh gpadmin@worker${k} << eof
+ssh scidb@worker${k} << eof
     if [ -f "/tmp/monitor${k}.txt" ]; then
         rm /tmp/monitor${k}.txt
     fi
@@ -163,3 +163,24 @@ loadTable(){
 	sh ./monitor/monitor_stop.sh
 }
 
+# 汇总结果
+colResFun(){
+	echo `date`" scp files" >> run.log
+	echo -e "\033[32;49;1m [scp files] \033[39;49;0m"
+for k in $(seq 1 6)
+do
+echo `date`" worker${k} scp" >> run.log
+echo -e "\033[33;49;1m [worker${k} scp] \033[39;49;0m"
+ssh scidb@worker${k} << eof
+if [ -f "/tmp/monitor${k}.txt" ]; then
+expect << exp
+	spawn scp -o StrictHostKeyChecking=no /tmp/monitor${k}.txt scidb@JPDB1:/tmp 
+	expect "assword:"
+	send "$1\r"
+	expect eof
+exp
+fi
+eof
+done
+	mv /tmp/monitor.txt /tmp/monitor1.txt /tmp/monitor2.txt /tmp/monitor3.txt /tmp/monitor4.txt /tmp/monitor5.txt /tmp/monitor6.txt $2
+}
