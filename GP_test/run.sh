@@ -14,18 +14,7 @@ echo `date`" program start" >> run.log
 echo -e "\033[32;49;1m [program start] \033[39;49;0m"
 
 # 创建目录
-# rec_load 存放导入结果
-# rec_query 存放查询结果
-echo `date`" mkdir" >> run.log
-echo -e "\033[32;49;1m [clear cache] \033[39;49;0m"
-if [ -d "./rec_load" ]; then
-    rm -rf ./rec_load
-    mkdir ./rec_load
-fi
-if [ -d "./rec_query" ]; then
-    rm -rf ./rec_query
-    mkdir ./rec_query
-fi
+createDirFun
 
 # 清空节点缓存缓存
 cleanCacheFun jipeng1008
