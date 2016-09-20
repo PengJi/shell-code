@@ -5,32 +5,7 @@
 doc
 
 # 删除旧文件
-echo `date`" deleting monitor files" >> run.log
-echo -e "\033[33;49;1m [deleting monitor files] \033[39;49;0m"
-if [ -f "/tmp/monitor.txt" ]; then
-    rm /tmp/monitor.txt
-fi
-if [ -f "./rec_query/galaxylj.txt" ]; then
-    rm ./rec_query/galaxylj.txt
-fi
-if [ -f "./rec_query/photoobjall.txt" ]; then
-    rm ./rec_query/photoobjall.txt
-fi
-if [ -f "./rec_query/photoprimarylj.txt" ]; then
-    rm ./rec_query/photoprimarylj.txt
-fi
-if [ -f "./rec_query/starlj.txt" ]; then
-    rm ./rec_query/starlj.txt
-fi
-
-for k in $(seq 1 6)
-do
-ssh gpadmin@node${k} << eof
-	if [ -f "/tmp/monitor${k}.txt" ]; then
-		rm /tmp/monitor${k}.txt
-	fi
-eof
-done
+delQueryResFun
 
 # 查询表
 sh ./monitor/monitor_start.sh
@@ -181,5 +156,5 @@ echo -e "\033[32;49;1m [moving monitor files] \033[39;49;0m"
 mv /tmp/monitor.txt /tmp/monitor1.txt /tmp/monitor2.txt /tmp/monitor3.txt /tmp/monitor4.txt /tmp/monitor5.txt /tmp/monitor6.txt ./rec_query
 
 # 执行完毕
-echo `date`" Operation Complete" >> run.log
-echo -e "\033[32;49;1m [Operation Complete] \033[39;49;0m"
+echo `date`" Query Operation Complete" >> run.log
+echo -e "\033[32;49;1m [Query Operation Complete] \033[39;49;0m"
