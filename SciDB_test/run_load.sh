@@ -11,7 +11,7 @@ doc
 delLoadResFun
 
 # 导入10G表
-loadTable 10
+loadTable $1
 
 # 汇总结果
 # 主节点scidb用户的密码
