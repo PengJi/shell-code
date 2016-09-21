@@ -1,6 +1,6 @@
 :<<doc
 需要修改的参数：
-表名:    astronomy
+导入表的大小：10、20、50、100
 主节点名: JPDB2
 从节点名: node1/node2/node3/node4/node5/node6
 doc
@@ -11,8 +11,8 @@ doc
 # 删除旧文件
 delLoadResFun
 
-# 导入10G表
-loadTable 10
+# 导入表
+loadTable $1
 
 # 得到表的大小
 getTabeSizeFun
