@@ -174,6 +174,7 @@ echo -e "\033[33;49;1m [worker${k} scp] \033[39;49;0m"
 ssh scidb@worker${k} << eof
 if [ -f "/tmp/monitor${k}.txt" ]; then
 expect << exp
+	set timeout -1
 	spawn scp -o StrictHostKeyChecking=no /tmp/monitor${k}.txt scidb@JPDB1:/tmp 
 	expect "assword:"
 	send "$1\r"
