@@ -17,15 +17,17 @@ echo -e "\033[32;49;1m [program start] \033[39;49;0m"
 createDirFun
 
 # 清空节点缓存缓存
+# 传入参数：各节点root用户的密码
 cleanCacheFun jipeng1008
 
 # 清空表
 truncateTableFun
 
 # 导入表
+# 传入参数：导入的文件大小
 echo -e "\033[32;49;1m [load tables] \033[39;49;0m"
 echo `date`" start load tables" >> run.log
-sh run_load.sh 20
+sh run_load.sh 50
 echo `date`" end load tables" >> run.log
 
 # 中场休息~
