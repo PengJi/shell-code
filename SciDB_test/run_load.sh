@@ -10,8 +10,8 @@ doc
 # 删除旧文件
 delLoadResFun
 
-# 导入10G表
-loadTable 10
+# 导入表，参数可以是10、20、50
+loadTable $1
 
 # 汇总结果
 # 主节点scidb用户的密码

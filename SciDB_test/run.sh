@@ -28,7 +28,7 @@ echo `date`" end truncate tables" >> run.log
 # 导入表
 echo -e "\033[32;49;1m [load tables] \033[39;49;0m"
 echo `date`" start load tables" >> run.log
-sh run_load.sh
+sh run_load.sh 10
 echo `date`" end load tables" >> run.log
 
 # 中场休息~

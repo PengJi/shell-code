@@ -122,7 +122,8 @@ loadTable(){
 	echo `date`" loading galaxylj" >> run.log
 	echo -e "\033[32;49;1m [loading galaxylj] \033[39;49;0m"
 	sleep 2
-	iquery -aq "aio_input('/home/scidb/astronomy_data/"$1"G/GalaxyLJ"$1"_comma.csv', 'num_attributes=509')" >> /dev/null
+	echo "load GalaxyLJ time:" > ./rec_load/galaxylj.txt
+	iquery -aq "set no fetch;load(GalaxyLJ ,'/home/scidb/astronomy_data/"$1"G/GalaxyLJ"$1"_comma.csv', -2, 'CSV');" >> ./rec_load/galaxylj.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 
@@ -131,7 +132,8 @@ loadTable(){
 	echo `date`" loading photoobjall" >> run.log
 	echo -e "\033[32;49;1m [loading photoobjall] \033[39;49;0m"
 	sleep 2
-	iquery -aq "aio_input('/home/scidb/astronomy_data/"$1"G/PhotoObjAll"$1"_comma.csv', 'num_attributes=509')" >> /dev/null
+	echo "load PhotoObjAll time:" > ./rec_load/photoobjall.txt
+	iquery -aq "set no fetch;load(PhotoObjAll ,'/home/scidb/astronomy_data/"$1"G/PhotoObjAll"$1"_comma.csv', -2, 'CSV');" >> ./rec_load/photoobjall.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 
@@ -140,7 +142,8 @@ loadTable(){
 	echo `date`" loading photoprimarylj" >> run.log
 	echo -e "\033[32;49;1m [loading photoprimarylj] \033[39;49;0m"
 	sleep 2
-	iquery -aq "aio_input('/home/scidb/astronomy_data/"$1"G/PhotoPrimaryLJ"$1"_comma.csv', 'num_attributes=509')" >> /dev/null
+	echo "load photoprimarylj time:" > ./rec_load/photoprimarylj.txt
+	iquery -aq "set no fetch;load(PhotoPrimaryLJ ,'/home/scidb/astronomy_data/"$1"G/PhotoPrimaryLJ"$1"_comma.csv', -2, 'CSV');" >> ./rec_load/photoprimarylj.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 
@@ -149,7 +152,8 @@ loadTable(){
 	echo `date`" loading starlj" >> run.log
 	echo -e "\033[32;49;1m [loading starlj] \033[39;49;0m"
 	sleep 2
-	iquery -aq "aio_input('/home/scidb/astronomy_data/"$1"G/StarLJ"$1"_comma.csv', 'num_attributes=509')" >> /dev/null
+	echo "load starlj time:" > ./rec_load/starlj.txt
+	iquery -aq "set no fetch;load(StarLJ ,'/home/scidb/astronomy_data/"$1"G/StarLJ"$1"_comma.csv', -2, 'CSV');" >> ./rec_load/starlj.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 
@@ -158,7 +162,8 @@ loadTable(){
 	echo `date`" loading neighbors" >> run.log
 	echo -e "\033[32;49;1m [loading neighbors] \033[39;49;0m"
 	sleep 2
-	iquery -aq "aio_input('/home/scidb/astronomy_data/"$1"G/neighbors"$1"_comma.csv', 'num_attributes=509')" >> /dev/null
+	echo "load neighbors time:" > ./rec_load/neighbors.txt
+	iquery -aq "set no fetch;load(neighbors ,'/home/scidb/astronomy_data/"$1"G/neighbors"$1"_comma.csv', -2, 'CSV');" >> ./rec_load/neighbors.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
 }
