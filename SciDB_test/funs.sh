@@ -169,6 +169,9 @@ loadTable(){
 }
 
 # 汇总结果
+# 参数
+# 主节点scidb用户密码：scidb
+# 要汇总的目录：./rec_load、./rec_query
 colResFun(){
 	echo `date`" scp files" >> run.log
 	echo -e "\033[32;49;1m [scp files] \033[39;49;0m"
