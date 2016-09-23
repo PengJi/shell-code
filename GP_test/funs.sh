@@ -18,6 +18,111 @@ createDirFun(){
 	mkdir ./rec_query
 }
 
+# 创建表
+# 参数：
+# 表名：galaxylj/photoobjall/photoprimarylj/StarLJ/neighbors
+# 表的类型：a/ac/ao/aoc/空
+createTableFun(){
+	if [ $1 == "neighbors" ]
+	then
+		echo `date`" create $1" >> run.log
+		psql -d astronomy -f "./sql/"$1".sql"
+		return
+	fi
+
+	if  [ -n "$2" ] ;then
+    	if [ $2 == "a" ]
+	    then
+    	    echo `date`" create "$1"_a" >> run.log
+			psql -d astronomy -f "./sql/"$1"_a.sql"
+	    elif [ $2 == "ac" ]
+    	then
+        	echo `date`" create "$1"_ac" >> run.log
+			psql -d astronomy -f "./sql/"$1"_ac.sql"
+	    elif [ $2 == "ao" ]
+    	then
+        	echo `date`" create "$1"_ao" >> run.log
+			psql -d astronomy -f "./sql/"$1"_ao.sql"
+		elif [ $2 == "aoc" ]
+		then
+			echo `date`" create "$1"_aoc" >> run.log
+			psql -d astronomy -f "./sql/"$1"_aoc.sql"
+	    fi  
+	else
+        echo `date`" create $1" >> run.log
+		psql -d astronomy -f "./sql/"$1".sql"
+	fi
+}
+
+# 执行导入和查询
+# 参数:
+# 表的类型：a/ac/ao/aoc
+mainFun(){
+	if [ -n "$1" ]
+	then
+		mkdir ./10G_$1
+		mkdir ./20G_$1
+		mkdir ./50G_$1
+	
+		for k in $(seq 1 10 )
+		do
+    		./run.sh 10
+	    	mv ./rec_load ./rec_load-${k}
+	    	mv ./rec_query ./rec_query-${k}
+		    mv ./rec_load-${k} ./10G_$1
+	    	mv ./rec_query-${k} ./10G_$1
+		done
+
+		for k in $(seq 1 10 )
+		do
+	    	./run.sh 20
+		    mv ./rec_load ./rec_load-${k}
+	    	mv ./rec_query ./rec_query-${k}
+		    mv ./rec_load-${k} ./20G_$1
+		    mv ./rec_query-${k} ./20G_$1
+		done
+
+		for k in $(seq 1 10 )
+		do
+	    	./run.sh 50
+		    mv ./rec_load ./rec_load-${k}
+		    mv ./rec_query ./rec_query-${k}
+		    mv ./rec_load-${k} ./50G_$1
+		    mv ./rec_query-${k} ./50G_$1
+		done
+	else
+        mkdir ./10G
+        mkdir ./20G
+        mkdir ./50G
+        for k in $(seq 1 10 )
+        do
+            ./run.sh 10
+            mv ./rec_load ./rec_load-${k}
+            mv ./rec_query ./rec_query-${k}
+            mv ./rec_load-${k} ./10G
+            mv ./rec_query-${k} ./10G
+        done
+        
+        for k in $(seq 1 10 )
+        do
+            ./run.sh 20
+            mv ./rec_load ./rec_load-${k}
+            mv ./rec_query ./rec_query-${k}
+            mv ./rec_load-${k} ./20G
+            mv ./rec_query-${k} ./20G
+        done
+
+        for k in $(seq 1 10 )
+        do
+            ./run.sh 50
+            mv ./rec_load ./rec_load-${k}
+            mv ./rec_query ./rec_query-${k}
+            mv ./rec_load-${k} ./50G
+            mv ./rec_query-${k} ./50G
+        done
+	fi
+}
+
 # 清空集群中节点的缓存
 # passwd为各节点root的密码
 cleanCacheFun(){
@@ -60,6 +165,14 @@ truncateTableFun(){
 	echo -e "\033[32;49;1m [truncate tables] \033[39;49;0m"
 	psql -d astronomy -c "truncate galaxylj;truncate neighbors;truncate photoobjall;truncate photoprimarylj;truncate starlj;" >> run.log
 	echo `date`" end truncate tables" >> run.log
+}
+
+# 删除表
+dropTableFun(){
+	echo `date`" start drop tables" >> run.log
+    echo -e "\033[32;49;1m [drop tables] \033[39;49;0m"
+    psql -d astronomy -c "drop table galaxylj;drop table neighbors;drop table photoobjall;drop table photoprimarylj;drop table starlj;" >> run.log
+    echo `date`" end drop tables" >> run.log
 }
 
 # 删除旧的导入结果文件
