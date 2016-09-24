@@ -18,7 +18,7 @@ createDirFun
 # 清空缓存
 cleanCacheFun jipeng1008
 
-# 清空表
+# 创建表
 echo `date`" start truncate tables" >> run.log
 echo -e "\033[32;49;1m [truncate tables] \033[39;49;0m"
 echo "[truncate tables]"
@@ -28,7 +28,7 @@ echo `date`" end truncate tables" >> run.log
 # 导入表
 echo -e "\033[32;49;1m [load tables] \033[39;49;0m"
 echo `date`" start load tables" >> run.log
-sh run_load.sh 10
+sh run_load.sh $1
 echo `date`" end load tables" >> run.log
 
 # 中场休息~
