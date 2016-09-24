@@ -27,7 +27,7 @@ truncateTableFun
 # 传入参数：导入的文件大小
 echo -e "\033[32;49;1m [load tables] \033[39;49;0m"
 echo `date`" start load tables" >> run.log
-sh run_load.sh 50
+sh run_load.sh $1
 echo `date`" end load tables" >> run.log
 
 # 中场休息~
