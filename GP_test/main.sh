@@ -4,6 +4,8 @@ doc
 
 . ./funs.sh
 
+dropTableFun
+
 # 普通表分别执行10次
 createTableFun galaxylj
 createTableFun photoobjall 
@@ -64,3 +66,4 @@ cleanCacheFun
 truncateTableFun
 delQueryResFun
 dropTableFun
+
