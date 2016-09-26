@@ -4,6 +4,7 @@ doc
 
 . ./funs.sh
 
+truncateTableFun
 dropTableFun
 
 # 普通表分别执行10次
