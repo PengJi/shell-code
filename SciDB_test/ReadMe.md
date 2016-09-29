@@ -1,8 +1,8 @@
-# SciDB自动化导入和查询数据
+ SciDB自动化导入和查询数据
 
 # 程序说明
-* sudo yum install expect -y
-* sudo yum install collectl -y
+* `sudo yum install expect -y`
+* `sudo yum install collectl -y`
 * scidb导入工具为: accelerated_io_tools  
 * 数据文件的存放位置与文件命名均需按照统一的格式，以GalaxyLJ表为例：  
 10G表：  
