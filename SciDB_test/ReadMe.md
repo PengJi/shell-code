@@ -1,4 +1,4 @@
- SciDB自动化导入和查询数据
+# SciDB自动化导入和查询数据
 
 # 程序说明
 * `sudo yum install expect -y`
