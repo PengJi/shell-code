@@ -8,7 +8,7 @@ mkdir ./10G
 mkdir ./20G
 mkdir ./50G
 
-for k in $(seq 1 10 )
+for k in $(seq 1 5 )
 do
 	./run.sh 10
 	mv ./rec_load ./rec_load-${k}
@@ -17,7 +17,7 @@ do
 	mv ./rec_query-${k} ./10G
 done
 
-for k in $(seq 1 10 )
+for k in $(seq 1 5 )
 do  
 	./run.sh 20
 	mv ./rec_load ./rec_load-${k}
@@ -26,7 +26,7 @@ do
 	mv ./rec_query-${k} ./20G
 done
 
-for k in $(seq 1 10 )
+for k in $(seq 1 5 )
 do  
 	./run.sh 50
 	mv ./rec_load ./rec_load-${k}

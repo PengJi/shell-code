@@ -17,12 +17,12 @@ createDirFun(){
 }
 
 # 清空集群中各个节点的缓存
-# 参数为各节点root的密码
+# 参数:
+# 集群中为各节点root的密码
 cleanCacheFun(){
 	passwd="$1"
 	echo `date`" start clear cache" >> run.log
 	echo -e "\033[32;49;1m [clear cache] \033[39;49;0m"
-	echo -e "\033[33;49;1m [input root's password] \033[39;49;0m"
 expect << exp
 spawn su
 expect "assword:"
