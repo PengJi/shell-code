@@ -18,7 +18,7 @@ createDirFun
 # 清空缓存
 cleanCacheFun jipeng1008
 
-# 创建表
+# 删除之前的表并创建表
 echo `date`" start truncate tables" >> run.log
 echo -e "\033[32;49;1m [truncate tables] \033[39;49;0m"
 echo "[truncate tables]"

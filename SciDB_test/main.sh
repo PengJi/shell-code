@@ -4,10 +4,15 @@ doc
 
 . ./funs.sh
 
+echo -e "\033[35;49;1m [program start] \033[39;49;0m"
+echo "************************************program start**************************************" >> run.log
+
+# 创建存放结果的目录
 mkdir ./10G
 mkdir ./20G
 mkdir ./50G
 
+# 导入和查询10G数据
 for k in $(seq 1 5 )
 do
 	./run.sh 10
@@ -17,6 +22,7 @@ do
 	mv ./rec_query-${k} ./10G
 done
 
+# 导入和查询20G数据
 for k in $(seq 1 5 )
 do  
 	./run.sh 20
@@ -26,6 +32,7 @@ do
 	mv ./rec_query-${k} ./20G
 done
 
+# 导入和查询50G数据
 for k in $(seq 1 5 )
 do  
 	./run.sh 50
@@ -34,3 +41,9 @@ do
 	mv ./rec_load-${k} ./50G
 	mv ./rec_query-${k} ./50G
 done
+
+# 删除表
+delTable
+
+echo -e "\033[35;49;1m [program end] \033[39;49;0m"
+echo "************************************program end**************************************" >> run.log

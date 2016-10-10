@@ -114,6 +114,16 @@ eof
 done
 }
 
+# 删除表
+delTable(){
+	echo -e "\033[32;49;1m [remove array] \033[39;49;0m"
+	iquery -q "remove(GalaxyLJ)";
+	iquery -q "remove(PhotoObjAll)";
+	iquery -q "remove(PhotoPrimaryLJ)";
+	iquery -q "remove(StarLJ)";
+	iquery -q "remove(neighbors)";
+}
+
 # 导入表
 # 参数可以使10、20、50、100
 loadTable(){
