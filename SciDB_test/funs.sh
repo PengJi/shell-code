@@ -125,7 +125,8 @@ delTable(){
 }
 
 # 导入表
-# 参数可以使10、20、50、100
+# 参数:
+# 数据大小: 10、20、50、100
 loadTable(){
 	# 导入GalaxyLJ
 	sh ./monitor/load_monitor_start.sh
