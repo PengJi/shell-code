@@ -44,6 +44,8 @@ done
 
 # 删除表
 delTable
+# 清空缓存
+cleanCacheFun
 
 echo -e "\033[35;49;1m [program end] \033[39;49;0m"
 echo "************************************program end**************************************" >> run.log
