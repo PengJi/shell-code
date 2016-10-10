@@ -16,6 +16,7 @@ createTableFun neighbors
 
 mainFun
 
+truncateTableFun
 dropTableFun
 
 # appendonly表分别执行10次
@@ -27,6 +28,7 @@ createTableFun neighbors
 
 mainFun a
 
+truncateTableFun
 dropTableFun
 
 # 压缩表分别执行10次
@@ -38,6 +40,7 @@ createTableFun neighbors
 
 mainFun ac
 
+truncateTableFun
 dropTableFun
 
 # 列存储表分别执行10次
@@ -49,6 +52,7 @@ createTableFun neighbors
 
 mainFun ao
 
+truncateTableFun
 dropTableFun
 
 # 列存储压缩表分别执行10次
@@ -60,11 +64,8 @@ createTableFun neighbors
 
 mainFun aoc
 
-dropTableFun
-
 # 清理数据库和文件
 cleanCacheFun
 truncateTableFun
 delQueryResFun
 dropTableFun
-

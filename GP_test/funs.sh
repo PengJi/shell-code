@@ -64,7 +64,7 @@ mainFun(){
 		mkdir ./20G_$1
 		mkdir ./50G_$1
 	
-		for k in $(seq 1 10 )
+		for k in $(seq 1 5 )
 		do
     		./run.sh 10
 	    	mv ./rec_load ./rec_load-${k}
@@ -73,7 +73,7 @@ mainFun(){
 	    	mv ./rec_query-${k} ./10G_$1
 		done
 
-		for k in $(seq 1 10 )
+		for k in $(seq 1 5 )
 		do
 	    	./run.sh 20
 		    mv ./rec_load ./rec_load-${k}
@@ -82,7 +82,7 @@ mainFun(){
 		    mv ./rec_query-${k} ./20G_$1
 		done
 
-		for k in $(seq 1 10 )
+		for k in $(seq 1 5 )
 		do
 	    	./run.sh 50
 		    mv ./rec_load ./rec_load-${k}
@@ -94,7 +94,7 @@ mainFun(){
         mkdir ./10G
         mkdir ./20G
         mkdir ./50G
-        for k in $(seq 1 10 )
+        for k in $(seq 1 5 )
         do
             ./run.sh 10
             mv ./rec_load ./rec_load-${k}
@@ -103,7 +103,7 @@ mainFun(){
             mv ./rec_query-${k} ./10G
         done
         
-        for k in $(seq 1 10 )
+        for k in $(seq 1 5 )
         do
             ./run.sh 20
             mv ./rec_load ./rec_load-${k}
@@ -112,7 +112,7 @@ mainFun(){
             mv ./rec_query-${k} ./20G
         done
 
-        for k in $(seq 1 10 )
+        for k in $(seq 1 5 )
         do
             ./run.sh 50
             mv ./rec_load ./rec_load-${k}
