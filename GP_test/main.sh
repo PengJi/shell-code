@@ -4,6 +4,9 @@ doc
 
 . ./funs.sh
 
+echo -e "\033[35;49;1m [program start] \033[39;49;0m"
+echo "************************************program start**************************************" >> run.log
+
 truncateTableFun
 dropTableFun
 
@@ -69,3 +72,6 @@ cleanCacheFun
 truncateTableFun
 delQueryResFun
 dropTableFun
+
+echo -e "\033[35;49;1m [program end] \033[39;49;0m"
+echo "************************************program end**************************************" >> run.log
