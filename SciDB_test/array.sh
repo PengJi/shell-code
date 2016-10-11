@@ -1,3 +1,7 @@
+:<<doc
+删除表并创建
+doc
+
 echo -e "\033[32;49;1m [remove array] \033[39;49;0m"
 iquery -q "remove(GalaxyLJ)";
 iquery -q "remove(PhotoObjAll)";

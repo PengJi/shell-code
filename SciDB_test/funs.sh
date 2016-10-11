@@ -1,5 +1,13 @@
 :<<doc
-辅助函数
+辅助函数:
+createDirFun --创建存放结果的目录
+cleanCacheFun jipeng1008 --清空集群中各节点的缓存
+delLoadResFun --删除旧的导入结果文件
+delQueryResFun --删除旧的查询结果文件
+delTable --删除表
+loadTable 10 --导入表
+queryTableFun --查询表
+colResFun scidb ./rec_load --汇总结果
 doc
 
 # 创建存放结果的目录
@@ -295,8 +303,9 @@ r - i < (0.08 + 0.42 * (g - r - 0.96)) or g - r > 2.26 ) and ( i - z < 0.25 );" 
 }
 
 # 汇总结果
-# 参数
+# 参数1：
 # 主节点scidb用户密码：scidb
+# 参数2：
 # 要汇总的目录：./rec_load、./rec_query
 colResFun(){
 	echo `date`" scp files" >> run.log
