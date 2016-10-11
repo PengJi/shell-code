@@ -1,5 +1,16 @@
 :<<doc
-辅助函数
+辅助函数:
+createDirFun --创建存放结果的目录
+createTableFun galaxylj a --创建表
+mainFun a --执行导入和查询
+cleanCacheFun --清空缓存
+truncateTableFun --清空表
+dropTableFun --删除表
+delLoadResFun --删除旧的导入结果文件
+delQueryResFun --删除旧的查询结果文件
+loadTable 10 --导入表
+getTabeSizeFun --得到导入之后表的大小
+colResFun --汇总结果
 doc
 
 # 创建目录
@@ -19,9 +30,10 @@ createDirFun(){
 }
 
 # 创建表
-# 参数：
+# 参数1：
 # 表名：galaxylj/photoobjall/photoprimarylj/StarLJ/neighbors
-# 表的类型：a/ac/ao/aoc/空
+# 参数2(可选)：
+# 表的类型：a/ac/ao/aoc/空(默认)
 createTableFun(){
 	if [ $1 == "neighbors" ]
 	then
@@ -239,7 +251,8 @@ done
 }
 
 # 导入表
-# 参数可以使10、20、50、100
+# 参数:
+# 数据大小：10、20、50、100
 loadTable(){
     # 导入galaxylj
     sh ./monitor/load_monitor_start.sh
