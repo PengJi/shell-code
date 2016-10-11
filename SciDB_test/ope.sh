@@ -1,14 +1,25 @@
 :<<doc
 参数及对应操作如下：
-t 创建表
-d 删除表
-l 10 导入数据
-s 查询表
-ls 10 [5] 导入和查询数据
-c 清空缓存
+p --准备工作
+t --创建表
+d --删除表
+l 10 --导入数据
+s --查询表
+ls 10 [5] --导入和查询数据
+c --清空缓存
+e --结尾工作
 doc
 
 . ./funs.sh
+
+# 准备工作
+# 参数：
+# 操作类型：p
+if [ "$1" = "p"]; then
+	mkdir ./10G
+	mkdir ./20G
+	mkdir ./50G
+fi
 
 # 创建表
 # 参数：
@@ -34,6 +45,8 @@ if [ "$1" = "l" ]; then
 fi
 
 # 查询数据
+# 参数：
+# 操作类型：s
 if [ "$1" = "s" ]; then
 	queryTableFun
 fi
@@ -69,6 +82,16 @@ if [ "$1" = "ls" ]; then
 fi
 
 # 清空缓存
+# 参数：
+# 操作类型：c
 if [ "$1" = "c" ]; then
 	cleanCacheFun jipeng1008
+fi
+
+# 结尾工作
+if [ "$1" = "e"]; then
+	# 删除表
+	delTable
+	# 清空缓存
+	cleanCacheFun
 fi
