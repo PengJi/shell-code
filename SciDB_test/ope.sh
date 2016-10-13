@@ -50,7 +50,7 @@ if [ "$1" = "l" ]; then
 	./run_load.sh $2
 fi
 
-# 导入某一个表
+# 导入某个表
 # 参数1：
 # 操作类型：ll
 # 参数2：
@@ -59,31 +59,26 @@ fi
 # 导入的数据量：10/20/50/100
 if [ "$1" = "ll" ]; then
 	if [ "$2" = "GalaxyLJ" ]; then
-		mkdir ./"$3"G
 		if [ ! -d "./rec_load" ]; then
 			mkdir ./rec_load
 		fi
 		loadGalaxyLJFun $3
 	elif [ "$2" = "PhotoObjAll" ]; then
-		mkdir ./"$3"G
 		if [ ! -d "./rec_load" ]; then
 			mkdir ./rec_load
 		fi
 		loadPhotoObjAllFun $3
 	elif [ "$2" = "PhotoPrimaryLJ" ]; then
-		mkdir ./"$3"G
 		if [ ! -d "./rec_load" ]; then
 			mkdir ./rec_load
 		fi
 		loadPhotoPrimaryLJFun $3
 	elif [ "$2" = "StarLJ" ]; then
-		mkdir ./"$3"G
 		if [ ! -d "./rec_load" ]; then
 			mkdir ./rec_load
 		fi
 		loadStarLJFun $3
 	elif [ "$2" = "neighbors" ]; then
-		mkdir ./"$3"G
 		if [ ! -d "./rec_load" ]; then
 			mkdir ./rec_load
 		fi
