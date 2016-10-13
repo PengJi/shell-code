@@ -255,49 +255,84 @@ done
 # 数据大小：10、20、50、100
 loadTable(){
     # 导入galaxylj
-    sh ./monitor/load_monitor_start.sh
-    echo `date`" loading galaxylj" >> run.log
-    echo -e "\033[32;49;1m [loading galaxylj] \033[39;49;0m"
-    sleep 2
-    gpload -f /home/gpadmin/astronomy_data/"$1"G/galaxylj"$1"_comma.yaml > ./rec_load/galaxylj.txt
-    sleep 2
-    sh ./monitor/monitor_stop.sh
+	loadGalaxyljFun $1
 
     # 导入photoobjall
-    sh ./monitor/load_monitor_start.sh
-    echo `date`" loading photoobjall" >> run.log
-    echo -e "\033[32;49;1m [loading photoobjall] \033[39;49;0m"
-    sleep 2
-    gpload -f /home/gpadmin/astronomy_data/"$1"G/photoobjall"$1"_comma.yaml > ./rec_load/photoobjall.txt
-    sleep 2
-    sh ./monitor/monitor_stop.sh
+	loadPhotoobjallFun $1
 
     # 导入photoprimarylj
-    sh ./monitor/load_monitor_start.sh
-    echo `date`" loading photoprimarylj" >> run.log
-    echo -e "\033[32;49;1m [loading photoprimarylj] \033[39;49;0m"
-    sleep 2
-    gpload -f /home/gpadmin/astronomy_data/"$1"G/photoprimarylj"$1"_comma.yaml > ./rec_load/photoprimarylj.txt
-    sleep 2
-    sh ./monitor/monitor_stop.sh
+	loadPhotoprimaryljFun $1
 
     # 导入starlj
-    sh ./monitor/load_monitor_start.sh
-    echo `date`" loading starlj" >> run.log
-    echo -e "\033[32;49;1m [loading starlj] \033[39;49;0m"
-    sleep 2
-    gpload -f /home/gpadmin/astronomy_data/"$1"G/starlj"$1"_comma.yaml > ./rec_load/starlj.txt
-    sleep 2
-    sh ./monitor/monitor_stop.sh
+	loadStarljFun $1
 
     # 导入neighbors
-    sh ./monitor/load_monitor_start.sh
-    echo `date`" loading neighbors" >> run.log
-    echo -e "\033[32;49;1m [loading neighbors] \033[39;49;0m"
-    sleep 2
-    gpload -f /home/gpadmin/astronomy_data/"$1"G/neighbors"$1"_comma.yaml > ./rec_load/neighbors.txt
-    sleep 2
-    sh ./monitor/monitor_stop.sh
+	loadneighborsFun $1
+}
+
+# 导入galaxylj表
+# 参数:
+# 数据大小：10、20、50、100
+loadGalaxyljFun(){
+	sh ./monitor/load_monitor_start.sh
+	echo `date`" loading galaxylj" >> run.log
+	echo -e "\033[32;49;1m [loading galaxylj] \033[39;49;0m"
+	sleep 2
+	gpload -f /home/gpadmin/astronomy_data/"$1"G/galaxylj"$1"_comma.yaml > ./rec_load/galaxylj.txt
+	sleep 2
+	sh ./monitor/monitor_stop.sh
+}
+
+# 导入photoobjall表
+# 参数:
+# 数据大小：10、20、50、100
+loadPhotoobjallFun(){
+	sh ./monitor/load_monitor_start.sh
+	echo `date`" loading photoobjall" >> run.log
+	echo -e "\033[32;49;1m [loading photoobjall] \033[39;49;0m"
+	sleep 2
+	gpload -f /home/gpadmin/astronomy_data/"$1"G/photoobjall"$1"_comma.yaml > ./rec_load/photoobjall.txt
+	sleep 2
+	sh ./monitor/monitor_stop.sh
+}
+
+# 导入photoprimarylj表
+# 参数:
+# 数据大小：10、20、50、100
+loadPhotoprimaryljFun(){
+	sh ./monitor/load_monitor_start.sh
+	echo `date`" loading photoprimarylj" >> run.log
+	echo -e "\033[32;49;1m [loading photoprimarylj] \033[39;49;0m"
+	sleep 2
+	gpload -f /home/gpadmin/astronomy_data/"$1"G/photoprimarylj"$1"_comma.yaml > ./rec_load/photoprimarylj.txt
+	sleep 2
+	sh ./monitor/monitor_stop.sh
+}
+
+# 导入starlj表
+# 参数:
+# 数据大小：10、20、50、100
+loadStarljFun(){
+	sh ./monitor/load_monitor_start.sh
+	echo `date`" loading starlj" >> run.log
+	echo -e "\033[32;49;1m [loading starlj] \033[39;49;0m"
+	sleep 2
+	gpload -f /home/gpadmin/astronomy_data/"$1"G/starlj"$1"_comma.yaml > ./rec_load/starlj.txt
+	sleep 2
+	sh ./monitor/monitor_stop.sh
+}
+
+# 导入neighbors表
+# 参数:
+# 数据大小：10、20、50、100
+loadneighborsFun(){
+	sh ./monitor/load_monitor_start.sh
+	echo `date`" loading neighbors" >> run.log
+	echo -e "\033[32;49;1m [loading neighbors] \033[39;49;0m"
+	sleep 2
+	gpload -f /home/gpadmin/astronomy_data/"$1"G/neighbors"$1"_comma.yaml > ./rec_load/neighbors.txt
+	sleep 2
+	sh ./monitor/monitor_stop.sh
 }
 
 # 得到导入后表的大小
