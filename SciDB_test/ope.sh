@@ -4,6 +4,7 @@ p --准备工作
 t --创建表
 d --删除表
 l 10 --导入数据
+ll GalaxyLJ 10 --导入某个表的数据
 s --查询表
 ls 10 [5] --导入和查询数据
 c --清空缓存
@@ -12,13 +13,18 @@ doc
 
 . ./funs.sh
 
-# 准备工作
-# 参数：
-# 操作类型：p
-if [ "$1" = "p"]; then
+prepareFun(){
 	mkdir ./10G
 	mkdir ./20G
 	mkdir ./50G
+	createDirFun
+}
+
+# 准备工作
+# 参数：
+# 操作类型：p
+if [ "$1" = "p" ]; then
+	prepareFun
 fi
 
 # 创建表
@@ -35,13 +41,56 @@ if [ "$1" = "d" ]; then
     delTable
 fi
 
-# 导入数据
+# 导入所有表
 # 参数1：
 # 操作类型：l
 # 参数2：
 # 导入的数据量：10/20/50/100
 if [ "$1" = "l" ]; then
 	./run_load.sh $2
+fi
+
+# 导入某一个表
+# 参数1：
+# 操作类型：ll
+# 参数2：
+# 导入的表名称：GalxyLJ/PhotoObjAll/PhotoPrimaryLJ/StarLJ/neighbors
+# 参数3：
+# 导入的数据量：10/20/50/100
+if [ "$1" = "ll" ]; then
+	if [ "$2" = "GalaxyLJ" ]; then
+		mkdir ./"$3"G
+		if [ ! -d "./rec_load" ]; then
+			mkdir ./rec_load
+		fi
+		loadGalaxyLJFun $3
+	elif [ "$2" = "PhotoObjAll" ]; then
+		mkdir ./"$3"G
+		if [ ! -d "./rec_load" ]; then
+			mkdir ./rec_load
+		fi
+		loadPhotoObjAllFun $3
+	elif [ "$2" = "PhotoPrimaryLJ" ]; then
+		mkdir ./"$3"G
+		if [ ! -d "./rec_load" ]; then
+			mkdir ./rec_load
+		fi
+		loadPhotoPrimaryLJFun $3
+	elif [ "$2" = "StarLJ" ]; then
+		mkdir ./"$3"G
+		if [ ! -d "./rec_load" ]; then
+			mkdir ./rec_load
+		fi
+		loadStarLJFun $3
+	elif [ "$2" = "neighbors" ]; then
+		mkdir ./"$3"G
+		if [ ! -d "./rec_load" ]; then
+			mkdir ./rec_load
+		fi
+		loadneighborsFun $3
+	else
+		echo -e "\033[31;49;1m [table not exists] \033[39;49;0m"
+	fi
 fi
 
 # 查询数据

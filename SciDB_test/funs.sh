@@ -5,7 +5,12 @@ cleanCacheFun jipeng1008 --清空集群中各节点的缓存
 delLoadResFun --删除旧的导入结果文件
 delQueryResFun --删除旧的查询结果文件
 delTable --删除表
-loadTable 10 --导入表
+loadTable 10 --导入所有表
+loadGalaxyLJFun 10 --导入GalaxyLJ表
+loadPhotoObjAllFun 10 --导入单个表
+loadPhotoPrimaryLJFun 10 --导入单个表
+loadStarLJFun 10 --导入单个表
+loadneighborsFun 10 --导入单个表
 queryTableFun --查询表
 colResFun scidb ./rec_load --汇总结果
 doc
@@ -132,59 +137,99 @@ delTable(){
 	iquery -q "remove(neighbors)";
 }
 
-# 导入表
+# 导入所有表
 # 参数:
 # 数据大小: 10、20、50、100
 loadTable(){
 	# 导入GalaxyLJ
-	sh ./monitor/load_monitor_start.sh
-	echo `date`" loading galaxylj" >> run.log
-	echo -e "\033[32;49;1m [loading galaxylj] \033[39;49;0m"
-	sleep 2
-	echo "load GalaxyLJ time:" > ./rec_load/galaxylj.txt
-	iquery -aq "set no fetch;load(GalaxyLJ ,'/home/scidb/astronomy_data/"$1"G/GalaxyLJ"$1"_comma.csv', -2, 'CSV');" >> ./rec_load/galaxylj.txt
-	sleep 2
-	sh ./monitor/monitor_stop.sh
+	loadGalaxyLJFun $1
 
 	# 导入PhotoOboAll
-	sh ./monitor/load_monitor_start.sh
-	echo `date`" loading photoobjall" >> run.log
-	echo -e "\033[32;49;1m [loading photoobjall] \033[39;49;0m"
-	sleep 2
-	echo "load PhotoObjAll time:" > ./rec_load/photoobjall.txt
-	iquery -aq "set no fetch;load(PhotoObjAll ,'/home/scidb/astronomy_data/"$1"G/PhotoObjAll"$1"_comma.csv', -2, 'CSV');" >> ./rec_load/photoobjall.txt
-	sleep 2
-	sh ./monitor/monitor_stop.sh
+	loadPhotoObjAllFun $1
 
 	# 导入PhotoPrimaryLJ
-	sh ./monitor/load_monitor_start.sh
-	echo `date`" loading photoprimarylj" >> run.log
-	echo -e "\033[32;49;1m [loading photoprimarylj] \033[39;49;0m"
-	sleep 2
-	echo "load photoprimarylj time:" > ./rec_load/photoprimarylj.txt
-	iquery -aq "set no fetch;load(PhotoPrimaryLJ ,'/home/scidb/astronomy_data/"$1"G/PhotoPrimaryLJ"$1"_comma.csv', -2, 'CSV');" >> ./rec_load/photoprimarylj.txt
-	sleep 2
-	sh ./monitor/monitor_stop.sh
+	loadPhotoPrimaryLJFun $1
 
 	# 导入StarLJ
-	sh ./monitor/load_monitor_start.sh
-	echo `date`" loading starlj" >> run.log
-	echo -e "\033[32;49;1m [loading starlj] \033[39;49;0m"
-	sleep 2
-	echo "load starlj time:" > ./rec_load/starlj.txt
-	iquery -aq "set no fetch;load(StarLJ ,'/home/scidb/astronomy_data/"$1"G/StarLJ"$1"_comma.csv', -2, 'CSV');" >> ./rec_load/starlj.txt
-	sleep 2
-	sh ./monitor/monitor_stop.sh
+	loadStarLJFun $1 
 
 	# 导入neighbors
-	sh ./monitor/load_monitor_start.sh 
-	echo `date`" loading neighbors" >> run.log
-	echo -e "\033[32;49;1m [loading neighbors] \033[39;49;0m"
-	sleep 2
-	echo "load neighbors time:" > ./rec_load/neighbors.txt
-	iquery -aq "set no fetch;load(neighbors ,'/home/scidb/astronomy_data/"$1"G/neighbors"$1"_comma.csv', -2, 'CSV');" >> ./rec_load/neighbors.txt
-	sleep 2
-	sh ./monitor/monitor_stop.sh
+	loadneighborsFun $1
+}
+
+# 导入GalaxyLJ表
+# 参数:
+# 数据大小: 10、20、50、100
+loadGalaxyLJFun(){
+    sh ./monitor/load_monitor_start.sh
+    echo `date`" loading galaxylj" >> run.log
+    echo -e "\033[32;49;1m [loading galaxylj] \033[39;49;0m"
+    sleep 2
+    echo "load GalaxyLJ time:" > ./rec_load/galaxylj.txt
+    iquery -aq "set no fetch;load(GalaxyLJ ,'/home/scidb/astronomy_data/"$1"G/GalaxyLJ"$1"_comma.csv',
+ -2, 'CSV');" >> ./rec_load/galaxylj.txt
+    sleep 2
+    sh ./monitor/monitor_stop.sh
+}
+
+# 导入PhotoObjAll表
+# 参数:
+# 数据大小: 10、20、50、100
+loadPhotoObjAllFun(){
+    sh ./monitor/load_monitor_start.sh
+    echo `date`" loading photoobjall" >> run.log
+    echo -e "\033[32;49;1m [loading photoobjall] \033[39;49;0m"
+    sleep 2
+    echo "load PhotoObjAll time:" > ./rec_load/photoobjall.txt
+    iquery -aq "set no fetch;load(PhotoObjAll ,'/home/scidb/astronomy_data/"$1"G/PhotoObjAll"$1"_comma
+.csv', -2, 'CSV');" >> ./rec_load/photoobjall.txt
+    sleep 2
+    sh ./monitor/monitor_stop.sh
+}
+
+# 导入PhotoPrimaryLJ表
+# 参数:
+# 数据大小: 10、20、50、100
+loadPhotoPrimaryLJFun(){
+    sh ./monitor/load_monitor_start.sh
+    echo `date`" loading photoprimarylj" >> run.log
+    echo -e "\033[32;49;1m [loading photoprimarylj] \033[39;49;0m"
+    sleep 2
+    echo "load photoprimarylj time:" > ./rec_load/photoprimarylj.txt
+    iquery -aq "set no fetch;load(PhotoPrimaryLJ ,'/home/scidb/astronomy_data/"$1"G/PhotoPrimaryLJ"$1"
+_comma.csv', -2, 'CSV');" >> ./rec_load/photoprimarylj.txt
+    sleep 2
+    sh ./monitor/monitor_stop.sh
+}
+
+# 导入StarLJ表
+# 参数:
+# 数据大小: 10、20、50、100
+loadStarLJFun(){
+    sh ./monitor/load_monitor_start.sh
+    echo `date`" loading starlj" >> run.log
+    echo -e "\033[32;49;1m [loading starlj] \033[39;49;0m"
+    sleep 2
+    echo "load starlj time:" > ./rec_load/starlj.txt
+    iquery -aq "set no fetch;load(StarLJ ,'/home/scidb/astronomy_data/"$1"G/StarLJ"$1"_comma.csv', -2,
+ 'CSV');" >> ./rec_load/starlj.txt
+    sleep 2
+    sh ./monitor/monitor_stop.sh
+}
+
+# 导入neighbors表
+# 参数:
+# 数据大小: 10、20、50、100
+loadneighborsFun(){
+    sh ./monitor/load_monitor_start.sh 
+    echo `date`" loading neighbors" >> run.log
+    echo -e "\033[32;49;1m [loading neighbors] \033[39;49;0m"
+    sleep 2
+    echo "load neighbors time:" > ./rec_load/neighbors.txt
+    iquery -aq "set no fetch;load(neighbors ,'/home/scidb/astronomy_data/"$1"G/neighbors"$1"_comma.csv
+', -2, 'CSV');" >> ./rec_load/neighbors.txt
+    sleep 2
+    sh ./monitor/monitor_stop.sh
 }
 
 # 表查询
