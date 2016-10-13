@@ -89,7 +89,9 @@ if [ "$1" = "c" ]; then
 fi
 
 # 结尾工作
-if [ "$1" = "e"]; then
+# 参数：
+# 操作类型：e
+if [ "$1" = "e" ]; then
 	# 删除表
 	delTable
 	# 清空缓存
