@@ -222,7 +222,7 @@ loadneighborsFun(){
     echo -e "\033[32;49;1m [loading neighbors] \033[39;49;0m"
     sleep 2
     echo "load neighbors time:" > ./rec_load/neighbors.txt
-    iquery -aq "set no fetch;load(neighbors ,'/home/scidb/astronomy_data/"$1"G/neighbors"$1"_comma.csv ,-2, 'CSV');" >> ./rec_load/neighbors.txt
+    iquery -aq "set no fetch;load(neighbors ,'/home/scidb/astronomy_data/"$1"G/neighbors"$1"_comma.csv' ,-2, 'CSV');" >> ./rec_load/neighbors.txt
     sleep 2
     sh ./monitor/monitor_stop.sh
 }
