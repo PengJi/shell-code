@@ -250,26 +250,6 @@ eof
 done
 }
 
-# 导入表
-# 参数:
-# 数据大小：10、20、50、100
-loadTable(){
-    # 导入galaxylj
-	loadGalaxyljFun $1
-
-    # 导入photoobjall
-	loadPhotoobjallFun $1
-
-    # 导入photoprimarylj
-	loadPhotoprimaryljFun $1
-
-    # 导入starlj
-	loadStarljFun $1
-
-    # 导入neighbors
-	loadneighborsFun $1
-}
-
 # 导入galaxylj表
 # 参数:
 # 数据大小：10、20、50、100
@@ -335,6 +315,26 @@ loadneighborsFun(){
 	sh ./monitor/monitor_stop.sh
 }
 
+# 导入所有表
+# 参数:
+# 数据大小：10、20、50、100
+loadTable(){
+    # 导入galaxylj
+	loadGalaxyljFun $1
+
+    # 导入photoobjall
+	loadPhotoobjallFun $1
+
+    # 导入photoprimarylj
+	loadPhotoprimaryljFun $1
+
+    # 导入starlj
+	loadStarljFun $1
+
+    # 导入neighbors
+	loadneighborsFun $1
+}
+
 # 得到导入后表的大小
 getTabeSizeFun(){
 	echo `date`" get table size" >> run.log
@@ -351,8 +351,9 @@ getTabeSizeFun(){
 	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('neighbors'));" >> ./rec_load/table_size.txt
 }
 
-# 查询表
-queryTableFun(){
+
+# Q1
+queryGalaxylj_1(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxylj-1] \033[39;49;0m"
 	sleep 2
@@ -361,34 +362,10 @@ queryTableFun(){
 	psql -d astronomy -f "./sql/galaxylj-1.sql" >> ./rec_query/galaxylj.txt
 	sleep 2
 	sh ./monitor/monitor_stop.sh
+}
 
-	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying photoobjall-1] \033[39;49;0m"
-	sleep 2
-	echo `date`" explain analyze select objID,ra,dec from PhotoObjAll where mode<=2 and ra>335 and ra<338.3 and dec>-1 and dec<1;" >> run.log
-	echo "explain analyze select objID,ra,dec from PhotoObjAll where mode<=2 and ra>335 and ra<338.3 and dec>-1 and dec<1;" >> ./rec_query/photoobjall.txt
-	psql -d astronomy -f "./sql/photoobjall-1.sql" >> ./rec_query/photoobjall.txt
-	sleep 2 
-	sh ./monitor/monitor_stop.sh
-
-	sh ./monitor/monitor_start.sh
-	sleep 2
-	echo -e "\033[32;49;1m [querying photoprimarylj-1] \033[39;49;0m"
-	echo `date`" explain analyze SELECT objID, ra , dec FROM PhotoPrimaryLJ WHERE ra > 185 and ra < 185.1 AND dec > 15 and dec < 15.1;" >> run.log
-	echo "explain analyze SELECT objID, ra , dec FROM PhotoPrimaryLJ WHERE ra > 185 and ra < 185.1 AND dec > 15 and dec < 15.1;" >> ./rec_query/photoprimarylj.txt
-	psql -d astronomy -f "./sql/photoprimarylj-1.sql" >> ./rec_query/photoprimarylj.txt
-	sleep 2 
-	sh ./monitor/monitor_stop.sh
-
-	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying starlj] \033[39;49;0m"
-	sleep 2
-	echo `date`" explain analyze SELECT run, camcol, rerun, field, objID, u, g, r, i, z, ra, dec FROM StarLJ WHERE ( u - g > 2.0 or u> 22.3 ) and ( i < 19 ) and ( i > 0 ) and ( g - r > 1.0 ) an d ( r - i < (0.08 + 0.42 * (g - r - 0.96)) or g - r > 2.26 ) and ( i - z < 0.25 );" >> run.log
-echo "explain analyze SELECT run, camcol, rerun, field, objID, u, g, r, i, z, ra, dec FROM StarLJ WHERE ( u - g > 2.0 or u> 22.3 ) and ( i < 19 ) and ( i > 0 ) and ( g - r > 1.0 ) and ( r - i < (0.08 + 0.42 * (g - r - 0.96)) or g - r > 2.26 ) and ( i - z < 0.25 );" >> ./rec_query/starlj.txt
-	psql -d astronomy -f "./sql/starlj.sql" >> ./rec_query/starlj.txt
-	sleep 2 
-	sh ./monitor/monitor_stop.sh
-
+# Q2
+queryGalaxylj_2(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxylj-2] \033[39;49;0m"
 	sleep 2
@@ -397,25 +374,10 @@ echo "explain analyze SELECT run, camcol, rerun, field, objID, u, g, r, i, z, ra
 	psql -d astronomy -f "./sql/galaxylj-2.sql" >> ./rec_query/galaxylj.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
+}
 
-	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying photoobjall-2] \033[39;49;0m"
-	sleep 2
-	echo `date`" explain analyze select objID from PhotoObjAll where (r - extinction_r) < 22 and mode =1 and type =3;" >> run.log
-	echo "explain analyze select objID from PhotoObjAll where (r - extinction_r) < 22 and mode =1 and type =3;" >> ./rec_query/photoobjall.txt
-	psql -d astronomy -f "./sql/photoobjall-2.sql" >> ./rec_query/photoobjall.txt
-	sleep 2 
-	sh ./monitor/monitor_stop.sh
-
-	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying photoprimarylj-2] \033[39;49;0m"
-	sleep 2
-	echo `date`" explain analyze SELECT P.objID FROM PhotoPrimaryLJ AS P,neighbors AS N WHERE P.objID = N.objID and P.objID =N.NeighborObjID;" >> run.log
-	echo "explain analyze SELECT P.objID FROM PhotoPrimaryLJ AS P,neighbors AS N WHERE P.objID = N.objID and P.objID =N.NeighborObjID;" >> ./rec_query/photoprimarylj.txt
-	psql -d astronomy -f "./sql/photoprimarylj-2.sql" >> ./rec_query/photoprimarylj.txt
-	sleep 2 
-	sh ./monitor/monitor_stop.sh
-
+# Q3
+queryGalaxylj_3(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxylj-3] \033[39;49;0m"
 	sleep 2
@@ -424,16 +386,10 @@ echo "explain analyze SELECT run, camcol, rerun, field, objID, u, g, r, i, z, ra
 	psql -d astronomy -f "./sql/galaxylj-3.sql" >> ./rec_query/galaxylj.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
+}
 
-	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying photoobjall-3] \033[39;49;0m"
-	sleep 2
-	echo `date`" explain analyze Select G.objID, G.u, G.g, G.r, G.i, G.z from (SELECT * FROM ( SELECT * FROM PhotoObjAll WHERE mode=1) as p WHERE type = 3) as G, (SELECT * FROM ( SELECT * FROM PhotoObjAll WHERE mode=1) as h) as S where G.parentID > 0 and G.parentID = S.parentID;" >> run.log
-	echo "explain analyze Select G.objID, G.u, G.g, G.r, G.i, G.z from (SELECT * FROM ( SELECT * FROM PhotoObjAll WHERE mode=1) as p WHERE type = 3) as G, (SELECT * FROM ( SELECT * FROM PhotoObjAll WHERE mode=1) as h) as S where G.parentID > 0 and G.parentID = S.parentID;" >> ./rec_query/photoobjall.txt
-	psql -d astronomy -f "./sql/photoobjall-3.sql" >> ./rec_query/photoobjall.txt
-	sleep 2 
-	sh ./monitor/monitor_stop.sh
-
+# Q4
+queryGalaxylj_4(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxylj-4] \033[39;49;0m"
 	sleep 2
@@ -442,16 +398,10 @@ echo "explain analyze SELECT run, camcol, rerun, field, objID, u, g, r, i, z, ra
 	psql -d astronomy -f "./sql/galaxylj-4.sql" >> ./rec_query/galaxylj.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
+}
 
-	sh ./monitor/monitor_start.sh
-	echo -e "\033[32;49;1m [querying photoobjall-4] \033[39;49;0m"
-	sleep 2
-	echo `date`" explain analyze Select G.objID, G.u, G.g, G.r, G.i, G.z from PhotoObjAll as G, StarLJ as S where G.parentID > 0 and G.parentID = S.parentID;" >> run.log
-	echo "explain analyze Select G.objID, G.u, G.g, G.r, G.i, G.z from PhotoObjAll as G, StarLJ as S where G.parentID > 0 and G.parentID = S.parentID;" >> ./rec_query/photoobjall.txt
-	psql -d astronomy -f "./sql/photoobjall-4.sql" >> ./rec_query/photoobjall.txt
-	sleep 2 
-	sh ./monitor/monitor_stop.sh
-
+# Q5
+queryGalaxylj_5(){
 	sh ./monitor/monitor_start.sh
 	echo -e "\033[32;49;1m [querying galaxylj-5] \033[39;49;0m"
 	sleep 2
@@ -460,6 +410,117 @@ echo "explain analyze SELECT run, camcol, rerun, field, objID, u, g, r, i, z, ra
 	psql -d astronomy -f "./sql/galaxylj-5.sql" >> ./rec_query/galaxylj.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
+}
+
+# Q6
+queryPhotoobjall_1(){
+	sh ./monitor/monitor_start.sh
+	echo -e "\033[32;49;1m [querying photoobjall-1] \033[39;49;0m"
+	sleep 2
+	echo `date`" explain analyze select objID,ra,dec from PhotoObjAll where mode<=2 and ra>335 and ra<338.3 and dec>-1 and dec<1;" >> run.log
+	echo "explain analyze select objID,ra,dec from PhotoObjAll where mode<=2 and ra>335 and ra<338.3 and dec>-1 and dec<1;" >> ./rec_query/photoobjall.txt
+	psql -d astronomy -f "./sql/photoobjall-1.sql" >> ./rec_query/photoobjall.txt
+	sleep 2 
+	sh ./monitor/monitor_stop.sh
+}
+
+# Q7
+queryPhotoobjall_2(){
+	sh ./monitor/monitor_start.sh
+	echo -e "\033[32;49;1m [querying photoobjall-2] \033[39;49;0m"
+	sleep 2
+	echo `date`" explain analyze select objID from PhotoObjAll where (r - extinction_r) < 22 and mode =1 and type =3;" >> run.log
+	echo "explain analyze select objID from PhotoObjAll where (r - extinction_r) < 22 and mode =1 and type =3;" >> ./rec_query/photoobjall.txt
+	psql -d astronomy -f "./sql/photoobjall-2.sql" >> ./rec_query/photoobjall.txt
+	sleep 2 
+	sh ./monitor/monitor_stop.sh
+}
+
+# Q8
+queryPhotoobjall_3(){
+	sh ./monitor/monitor_start.sh
+	echo -e "\033[32;49;1m [querying photoobjall-3] \033[39;49;0m"
+	sleep 2
+	echo `date`" explain analyze Select G.objID, G.u, G.g, G.r, G.i, G.z from (SELECT * FROM ( SELECT * FROM PhotoObjAll WHERE mode=1) as p WHERE type = 3) as G, (SELECT * FROM ( SELECT * FROM PhotoObjAll WHERE mode=1) as h) as S where G.parentID > 0 and G.parentID = S.parentID;" >> run.log
+	echo "explain analyze Select G.objID, G.u, G.g, G.r, G.i, G.z from (SELECT * FROM ( SELECT * FROM PhotoObjAll WHERE mode=1) as p WHERE type = 3) as G, (SELECT * FROM ( SELECT * FROM PhotoObjAll WHERE mode=1) as h) as S where G.parentID > 0 and G.parentID = S.parentID;" >> ./rec_query/photoobjall.txt
+	psql -d astronomy -f "./sql/photoobjall-3.sql" >> ./rec_query/photoobjall.txt
+	sleep 2 
+	sh ./monitor/monitor_stop.sh
+}
+
+# Q9
+queryPhotoobjall_4(){
+	sh ./monitor/monitor_start.sh
+	echo -e "\033[32;49;1m [querying photoobjall-4] \033[39;49;0m"
+	sleep 2
+	echo `date`" explain analyze Select G.objID, G.u, G.g, G.r, G.i, G.z from PhotoObjAll as G, StarLJ as S where G.parentID > 0 and G.parentID = S.parentID;" >> run.log
+	echo "explain analyze Select G.objID, G.u, G.g, G.r, G.i, G.z from PhotoObjAll as G, StarLJ as S where G.parentID > 0 and G.parentID = S.parentID;" >> ./rec_query/photoobjall.txt
+	psql -d astronomy -f "./sql/photoobjall-4.sql" >> ./rec_query/photoobjall.txt
+	sleep 2 
+	sh ./monitor/monitor_stop.sh
+}
+
+# Q10
+queryPhotoprimarylj_1(){
+	sh ./monitor/monitor_start.sh
+	sleep 2
+	echo -e "\033[32;49;1m [querying photoprimarylj-1] \033[39;49;0m"
+	echo `date`" explain analyze SELECT objID, ra , dec FROM PhotoPrimaryLJ WHERE ra > 185 and ra < 185.1 AND dec > 15 and dec < 15.1;" >> run.log
+	echo "explain analyze SELECT objID, ra , dec FROM PhotoPrimaryLJ WHERE ra > 185 and ra < 185.1 AND dec > 15 and dec < 15.1;" >> ./rec_query/photoprimarylj.txt
+	psql -d astronomy -f "./sql/photoprimarylj-1.sql" >> ./rec_query/photoprimarylj.txt
+	sleep 2 
+	sh ./monitor/monitor_stop.sh
+}
+
+# Q11
+queryPhotoprimarylj_2(){
+	sh ./monitor/monitor_start.sh
+	echo -e "\033[32;49;1m [querying photoprimarylj-2] \033[39;49;0m"
+	sleep 2
+	echo `date`" explain analyze SELECT P.objID FROM PhotoPrimaryLJ AS P,neighbors AS N WHERE P.objID = N.objID and P.objID =N.NeighborObjID;" >> run.log
+	echo "explain analyze SELECT P.objID FROM PhotoPrimaryLJ AS P,neighbors AS N WHERE P.objID = N.objID and P.objID =N.NeighborObjID;" >> ./rec_query/photoprimarylj.txt
+	psql -d astronomy -f "./sql/photoprimarylj-2.sql" >> ./rec_query/photoprimarylj.txt
+	sleep 2 
+	sh ./monitor/monitor_stop.sh
+}
+
+# Q12
+queryStarlj_1(){
+	sh ./monitor/monitor_start.sh
+	echo -e "\033[32;49;1m [querying starlj] \033[39;49;0m"
+	sleep 2
+	echo `date`" explain analyze SELECT run, camcol, rerun, field, objID, u, g, r, i, z, ra, dec FROM StarLJ WHERE ( u - g > 2.0 or u> 22.3 ) and ( i < 19 ) and ( i > 0 ) and ( g - r > 1.0 ) an d ( r - i < (0.08 + 0.42 * (g - r - 0.96)) or g - r > 2.26 ) and ( i - z < 0.25 );" >> run.log
+	echo "explain analyze SELECT run, camcol, rerun, field, objID, u, g, r, i, z, ra, dec FROM StarLJ WHERE ( u - g > 2.0 or u> 22.3 ) and ( i < 19 ) and ( i > 0 ) and ( g - r > 1.0 ) and ( r - i < (0.08 + 0.42 * (g - r - 0.96)) or g - r > 2.26 ) and ( i - z < 0.25 );" >> ./rec_query/starlj.txt
+	psql -d astronomy -f "./sql/starlj.sql" >> ./rec_query/starlj.txt
+	sleep 2 
+	sh ./monitor/monitor_stop.sh
+}
+
+# 查询表
+queryTableFun(){
+	queryGalaxylj_1
+
+	queryPhotoobjall_1
+
+	queryPhotoprimarylj_1
+
+	queryStarlj_1
+
+	queryGalaxylj_2
+
+	queryPhotoobjall_2
+
+	queryPhotoprimarylj_2
+
+	queryGalaxylj_3
+
+	queryPhotoobjall_3
+
+	queryGalaxylj_4
+
+	queryPhotoobjall_4
+
+	queryGalaxylj_5
 }
 
 # 汇总结果
