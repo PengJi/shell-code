@@ -6,6 +6,7 @@ q --清空表
 d --删除表
 t --创建表
 l 10 --导入数据
+ll galaxylj 10 --导入某个表
 s --查询表
 e --结尾工作
 doc
@@ -55,6 +56,7 @@ if [ "$1" = "l" ]; then
 	loadTable $2
 fi
 
+# 导入某个表
 # 参数1：
 # 操作类型：l
 # 参数2
@@ -104,6 +106,7 @@ fi
 # 参数
 # 操作类型：ls
 if [ "$1" = "ls" ]; then
+	echo "load and query table"
 fi
 
 # 结尾工作
