@@ -250,26 +250,6 @@ eof
 done
 }
 
-# 导入表
-# 参数:
-# 数据大小：10、20、50、100
-loadTable(){
-    # 导入galaxylj
-	loadGalaxyljFun $1
-
-    # 导入photoobjall
-	loadPhotoobjallFun $1
-
-    # 导入photoprimarylj
-	loadPhotoprimaryljFun $1
-
-    # 导入starlj
-	loadStarljFun $1
-
-    # 导入neighbors
-	loadneighborsFun $1
-}
-
 # 导入galaxylj表
 # 参数:
 # 数据大小：10、20、50、100
@@ -335,6 +315,26 @@ loadneighborsFun(){
 	sh ./monitor/monitor_stop.sh
 }
 
+# 导入所有表
+# 参数:
+# 数据大小：10、20、50、100
+loadTable(){
+    # 导入galaxylj
+	loadGalaxyljFun $1
+
+    # 导入photoobjall
+	loadPhotoobjallFun $1
+
+    # 导入photoprimarylj
+	loadPhotoprimaryljFun $1
+
+    # 导入starlj
+	loadStarljFun $1
+
+    # 导入neighbors
+	loadneighborsFun $1
+}
+
 # 得到导入后表的大小
 getTabeSizeFun(){
 	echo `date`" get table size" >> run.log
@@ -351,32 +351,6 @@ getTabeSizeFun(){
 	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('neighbors'));" >> ./rec_load/table_size.txt
 }
 
-# 查询表
-queryTableFun(){
-	queryGalaxylj_1
-
-	queryPhotoobjall_1
-
-	queryPhotoprimarylj_1
-
-	queryStarlj_1
-
-	queryGalaxylj_2
-
-	queryPhotoobjall_2
-
-	queryPhotoprimarylj_2
-
-	queryGalaxylj_3
-
-	queryPhotoobjall_3
-
-	queryGalaxylj_4
-
-	queryPhotoobjall_4
-
-	queryGalaxylj_5
-}
 
 # Q1
 queryGalaxylj_1(){
@@ -516,10 +490,37 @@ queryStarlj_1(){
 	echo -e "\033[32;49;1m [querying starlj] \033[39;49;0m"
 	sleep 2
 	echo `date`" explain analyze SELECT run, camcol, rerun, field, objID, u, g, r, i, z, ra, dec FROM StarLJ WHERE ( u - g > 2.0 or u> 22.3 ) and ( i < 19 ) and ( i > 0 ) and ( g - r > 1.0 ) an d ( r - i < (0.08 + 0.42 * (g - r - 0.96)) or g - r > 2.26 ) and ( i - z < 0.25 );" >> run.log
-echo "explain analyze SELECT run, camcol, rerun, field, objID, u, g, r, i, z, ra, dec FROM StarLJ WHERE ( u - g > 2.0 or u> 22.3 ) and ( i < 19 ) and ( i > 0 ) and ( g - r > 1.0 ) and ( r - i < (0.08 + 0.42 * (g - r - 0.96)) or g - r > 2.26 ) and ( i - z < 0.25 );" >> ./rec_query/starlj.txt
+	echo "explain analyze SELECT run, camcol, rerun, field, objID, u, g, r, i, z, ra, dec FROM StarLJ WHERE ( u - g > 2.0 or u> 22.3 ) and ( i < 19 ) and ( i > 0 ) and ( g - r > 1.0 ) and ( r - i < (0.08 + 0.42 * (g - r - 0.96)) or g - r > 2.26 ) and ( i - z < 0.25 );" >> ./rec_query/starlj.txt
 	psql -d astronomy -f "./sql/starlj.sql" >> ./rec_query/starlj.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
+}
+
+# 查询表
+queryTableFun(){
+	queryGalaxylj_1
+
+	queryPhotoobjall_1
+
+	queryPhotoprimarylj_1
+
+	queryStarlj_1
+
+	queryGalaxylj_2
+
+	queryPhotoobjall_2
+
+	queryPhotoprimarylj_2
+
+	queryGalaxylj_3
+
+	queryPhotoobjall_3
+
+	queryGalaxylj_4
+
+	queryPhotoobjall_4
+
+	queryGalaxylj_5
 }
 
 # 汇总结果

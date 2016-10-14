@@ -65,41 +65,67 @@ fi
 # 数据大小：10、20、50、100
 # 导入某个表
 if [ "$1" = "ll" ]; then
+	if [ ! -d "./rec_load" ]; then
+		mkdir ./rec_load
+	fi  
 	if [ "$2" = "galaxylj" ]; then
-        if [ ! -d "./rec_load" ]; then
-            mkdir ./rec_load
-        fi  
         loadGalaxyljFun $3
     elif [ "$2" = "photoobjall" ]; then
-        if [ ! -d "./rec_load" ]; then
-            mkdir ./rec_load
-        fi  
         loadPhotoobjallFun $3
     elif [ "$2" = "photoprimarylj" ]; then
-        if [ ! -d "./rec_load" ]; then
-            mkdir ./rec_load
-        fi  
         loadPhotoprimaryljFun $3
     elif [ "$2" = "starlj" ]; then
-        if [ ! -d "./rec_load" ]; then
-            mkdir ./rec_load
-        fi  
         loadStarljFun $3
     elif [ "$2" = "neighbors" ]; then
-        if [ ! -d "./rec_load" ]; then
-            mkdir ./rec_load
-        fi  
         loadneighborsFun $3
     else
         echo -e "\033[31;49;1m [table not exists] \033[39;49;0m"
     fi 
 fi
 
-# 查询表
+# 查询所有表
 # 参数
 # 操作类型：s
 if [ "$1" = "s" ]; then
 	queryTableFun
+fi
+
+# 查询单个表
+# 参数1：
+# 操作类型：sg
+# 参数2：
+# 查询：Q1/Q2/Q3/Q4/Q5/Q6/Q7/Q8/Q9/Q10/Q11/Q12
+if [ "$1" = "sg"  ]; then
+	if [ ! -d "./rec_load" ]; then
+		mkdir ./rec_load
+	fi
+	if [ "$2" = "Q1" ]; then
+		queryGalaxylj_1
+	elif [ "$2" = "Q2" ]; then
+		queryGalaxylj_2
+	elif [ "$2" = "Q3" ]; then
+		queryGalaxylj_3
+	elif [ "$3" = "Q4" ]; then
+		queryGalaxylj_4
+	elif [ "$4" = "Q5" ]; then
+		queryGalaxylj_5
+	elif [ "$5" = "Q6" ]; then
+		queryPhotoobjall_1
+	elif [ "$5" = "Q7" ]; then
+		queryPhotoobjall_2
+	elif [ "$5" = "Q8" ]; then
+		queryPhotoobjall_3
+	elif [ "$5" = "Q9" ]; then
+		queryPhotoobjall_4
+	elif [ "$5" = "Q10" ]; then
+		queryPhotoprimarylj_1
+	elif [ "$5" = "Q11" ]; then
+		queryPhotoprimarylj_2
+	elif [ "$5" = "Q12" ]; then
+		queryStarlj_1
+	else
+		echo -e "\033[31;49;1m [query not exists] \033[39;49;0m"
+	fi
 fi
 
 # 导入和查询数据
