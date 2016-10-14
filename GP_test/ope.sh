@@ -4,6 +4,7 @@
 p --准备工作
 q --清空表
 d --删除表
+c jipeng1008 --清空各节点的缓存
 t --创建表
 l 10 --导入数据
 ll galaxylj 10 --导入某个表
@@ -34,6 +35,15 @@ fi
 # 操作类型：d
 if [ "$1" = "d" ]; then
 	dropTableFun
+fi
+
+# 清空缓存
+# 参数1
+# 操作类型：c
+# 参数2
+# 各节点root的密码
+if [ "$1" = "c"  ]; then
+	cleanCacheFun $2
 fi
 
 # 创建表
