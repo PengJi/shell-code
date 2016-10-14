@@ -139,6 +139,8 @@ fi
 # 参数：
 # 操作类型：e
 if [ "$1" = "e" ]; then
+	# 清空表
+	truncateTableFun
     # 删除表
     delTable
     # 清空缓存
