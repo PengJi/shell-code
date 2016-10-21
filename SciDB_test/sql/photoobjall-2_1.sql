@@ -1,8 +1,9 @@
--- Q7
+-- Q
+-- count()
 set lang aql;
 
 select 
-	objID 
+	count(*) 
 from 
 	PhotoObjAll 
 where 

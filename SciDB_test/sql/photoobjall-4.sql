@@ -1,2 +1,8 @@
+-- Q9
 set lang aql;
-Select G.objID, G.u, G.g, G.r, G.i, G.z from PhotoObjAll as G, StarLJ as S where G.parentID > 0 and G.parentID = S.parentID;
+
+Select 
+	G.objID, G.u, G.g, G.r, G.i, G.z 
+from 
+	PhotoObjAll as G, StarLJ as S 
+where G.parentID > 0 and G.parentID = S.parentID;

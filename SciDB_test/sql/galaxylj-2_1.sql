@@ -1,8 +1,9 @@
--- Q2
+-- Q
+-- count()
 set lang aql;
 
 SELECT 
-	objID 
+	count(*) 
 FROM 
 	GalaxyLJ 
 WHERE r < 22 and extinction_r > 0.175;
