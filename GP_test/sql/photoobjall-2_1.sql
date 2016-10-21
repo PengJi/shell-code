@@ -1,6 +1,7 @@
--- Q7
+-- Q
+-- count
 explain analyze select 
-	objID 
+	count(*)
 from 
 	PhotoObjAll 
 where 

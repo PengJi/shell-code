@@ -1,6 +1,7 @@
--- Q2
+-- Q
+-- count
 explain analyze SELECT 
-	objID 
+	count(*)
 FROM 
 	GalaxyLJ 
 WHERE 
