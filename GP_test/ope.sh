@@ -5,7 +5,7 @@ p --准备工作
 q --清空表
 d --删除表
 c jipeng1008 --清空各节点的缓存
-t --创建表
+t galaxylj/photoobjall/photoprimarylj/StarLJ/neighbors [a]--创建表
 l 10 --导入数据
 ll galaxylj 10 --导入某个表
 s --查询表
