@@ -1,4 +1,4 @@
--- Q
+-- Q5-2
 -- remove count() function
 set lang aql;
 

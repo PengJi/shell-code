@@ -1,4 +1,4 @@
--- Q
+-- Q9-2
 -- exchange the orde of join
 set lang aql;
 
