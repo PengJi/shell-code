@@ -1,5 +1,8 @@
 -- Q7
 set lang aql;
+set no fetch;
+set no timer;
+set cusout;
 
 select 
 	objID 

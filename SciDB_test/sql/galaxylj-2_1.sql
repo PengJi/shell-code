@@ -1,6 +1,9 @@
--- Q
+-- Q2-1
 -- count()
 set lang aql;
+set no fetch;
+set no timer;
+set cusout;
 
 SELECT 
 	count(*) 

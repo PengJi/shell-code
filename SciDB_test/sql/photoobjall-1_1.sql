@@ -1,6 +1,9 @@
--- Q
+-- Q6-1
 -- order by 
 set lang aql;
+set no fetch;
+set no timer;
+set cusout;
 
 select 
 	objID,ra,dec 

@@ -1,6 +1,9 @@
--- Q
+-- Q11-2
 -- exchange the order of join
 set lang aql;
+set no fetch;
+set no timer;
+set cusout;
 
 SELECT 
 	P.objID 
