@@ -1,6 +1,9 @@
 -- Q11-1
 -- join
 set lang aql;
+set no fetch;
+set no timer;
+set cusout;
 
 SELECT 
 	P.objID 

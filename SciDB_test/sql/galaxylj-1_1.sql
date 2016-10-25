@@ -1,6 +1,9 @@
 -- Q1-1
 -- order by
 set lang aql;
+set no fetch;
+set no timer;
+set cusout;
 SELECT 
 	objID, cModelMag_g 
 FROm 

@@ -1,6 +1,9 @@
 -- Q5-2
 -- remove count() function
 set lang aql;
+set no fetch;
+set no timer;
+set cusout;
 
 SELECT 
 	g1.objID, g2.objID

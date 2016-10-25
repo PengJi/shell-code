@@ -1,5 +1,8 @@
 -- Q4
 set lang aql;
+set no fetch;
+set no timer;
+set cusout;
 
 SELECT 
 	g,run,rerun,camcol,field,objID 

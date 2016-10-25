@@ -1,6 +1,10 @@
 -- Q5-1
 -- reduce the number of where clause
 set lang aql;
+set no fetch;
+set no timer;
+set cusout;
+
 SELECT 
 	COUNT(*) 
 FROM 
