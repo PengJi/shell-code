@@ -5,7 +5,7 @@ set no timer;
 set cusout;
 
 SELECT 
-	COUNT(*) 
+	g1.objID, g2.objID
 FROM 
 	GalaxyLJ AS g1 JOIN neighbors AS N ON g1.objID = N.objID JOIN GalaxyLJ AS g2 ON g2.objID = N.NeighborObjID 
 WHERE
