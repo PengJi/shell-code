@@ -13,6 +13,126 @@ getTabeSizeFun --得到导入之后表的大小
 colResFun --汇总结果
 doc
 
+# 清空集群中节点的缓存
+# 参数
+# 为各节点root的密码
+cleanCacheFun(){
+	if [ -n "${1}" ]; then
+		passwd="$1"
+	else
+		passwd="jipeng1008"
+	fi
+	echo `date`" start clear cache" >> run.log
+	echo -e "\033[32;49;1m [clear cache] \033[39;49;0m"
+	echo -e "\033[33;49;1m [input root's password] \033[39;49;0m"
+expect << exp
+spawn su
+expect "assword:"
+send "${passwd}\r"
+expect "#"
+send "sync\r"
+send "echo 1 > /proc/sys/vm/drop_caches\r"
+send  "exit\r"
+expect eof
+exp
+
+for k in $(seq 1 6)
+do
+echo `date`" clear node${k} cache" >> run.log
+expect << exp
+spawn ssh root@node${k}
+expect "assword:"
+send "${passwd}\r"
+expect "#"
+send "sync\r"
+send "echo 1 > /proc/sys/vm/drop_caches\r"
+send  "exit\r"
+expect eof
+exp
+done
+	echo `date`" end clear cache" >> run.log
+}
+
+# 清空表
+# galaxylj/neighbors/photoobjall/photoprimarylj/starlj为5个表
+truncateTableFun(){
+	echo `date`" start truncate tables" >> run.log
+	echo -e "\033[32;49;1m [truncate tables] \033[39;49;0m"
+	psql -d astronomy -c "truncate galaxylj;truncate neighbors;truncate photoobjall;truncate photoprimarylj;truncate starlj;" >> run.log
+	echo `date`" end truncate tables" >> run.log
+}
+
+# 删除表
+dropTableFun(){
+	echo `date`" start drop tables" >> run.log
+    echo -e "\033[32;49;1m [drop tables] \033[39;49;0m"
+    psql -d astronomy -c "drop table galaxylj;drop table neighbors;drop table photoobjall;drop table photoprimarylj;drop table starlj;" >> run.log
+    echo `date`" end drop tables" >> run.log
+}
+
+# 删除旧的导入结果文件
+delLoadResFun(){
+	echo `date`" deleting monitor files" >> run.log
+	echo -e "\033[33;49;1m [deleting monitor files] \033[39;49;0m"
+	if [ -f "/tmp/monitor.txt" ]; then
+    	rm /tmp/monitor.txt
+	fi
+	if [ -f "./rec_load/galaxylj.txt" ]; then
+    	rm ./rec_load/galaxylj.txt
+	fi
+	if [ -f "./rec_load/photoobjall.txt" ]; then
+    	rm ./rec_load/photoobjall.txt
+	fi
+	if [ -f "./rec_load/photoprimarylj.txt" ]; then
+    	rm ./rec_load/photoprimarylj.txt
+	fi
+	if [ -f "./rec_load/starlj.txt" ]; then
+    	rm ./rec_load/starlj.txt
+	fi
+	if [ -f "./rec_load/neighbors.txt" ]; then
+    	rm ./rec_load/neighbors.txt
+	fi
+
+	for k in $(seq 1 6)
+	do
+ssh gpadmin@node${k} << eof
+if [ -f "/tmp/monitor${k}.txt" ]; then
+    rm /tmp/monitor${k}.txt
+fi
+eof
+	done
+}
+
+# 删除旧的查询结果文件
+delQueryResFun(){
+	echo `date`" deleting monitor files" >> run.log
+	echo -e "\033[33;49;1m [deleting monitor files] \033[39;49;0m"
+	if [ -f "/tmp/monitor.txt" ]; then
+    	rm /tmp/monitor.txt
+	fi
+	if [ -f "./rec_query/galaxylj.txt" ]; then
+    	rm ./rec_query/galaxylj.txt
+	fi
+	if [ -f "./rec_query/photoobjall.txt" ]; then
+    	rm ./rec_query/photoobjall.txt
+	fi
+	if [ -f "./rec_query/photoprimarylj.txt" ]; then
+	    rm ./rec_query/photoprimarylj.txt
+	fi
+	if [ -f "./rec_query/starlj.txt" ]; then
+    	rm ./rec_query/starlj.txt
+	fi
+
+for k in $(seq 1 6)
+do
+ssh gpadmin@node${k} << eof
+    if [ -f "/tmp/monitor${k}.txt" ]; then
+        rm /tmp/monitor${k}.txt
+    fi
+eof
+done
+}
+
 # 创建目录
 # rec_load 存放导入结果
 # rec_query 存放查询结果
@@ -133,121 +253,6 @@ mainFun(){
             mv ./rec_query-${k} ./50G
         done
 	fi
-}
-
-# 清空集群中节点的缓存
-# passwd为各节点root的密码
-cleanCacheFun(){
-	passwd="$1"
-	echo `date`" start clear cache" >> run.log
-	echo -e "\033[32;49;1m [clear cache] \033[39;49;0m"
-	echo -e "\033[33;49;1m [input root's password] \033[39;49;0m"
-expect << exp
-spawn su
-expect "assword:"
-send "${passwd}\r"
-expect "#"
-send "sync\r"
-send "echo 1 > /proc/sys/vm/drop_caches\r"
-send  "exit\r"
-expect eof
-exp
-
-for k in $(seq 1 6)
-do
-echo `date`" clear node${k} cache" >> run.log
-expect << exp
-spawn ssh root@node${k}
-expect "assword:"
-send "${passwd}\r"
-expect "#"
-send "sync\r"
-send "echo 1 > /proc/sys/vm/drop_caches\r"
-send  "exit\r"
-expect eof
-exp
-done
-	echo `date`" end clear cache" >> run.log
-}
-
-# 清空表
-# galaxylj/neighbors/photoobjall/photoprimarylj/starlj为5个表
-truncateTableFun(){
-	echo `date`" start truncate tables" >> run.log
-	echo -e "\033[32;49;1m [truncate tables] \033[39;49;0m"
-	psql -d astronomy -c "truncate galaxylj;truncate neighbors;truncate photoobjall;truncate photoprimarylj;truncate starlj;" >> run.log
-	echo `date`" end truncate tables" >> run.log
-}
-
-# 删除表
-dropTableFun(){
-	echo `date`" start drop tables" >> run.log
-    echo -e "\033[32;49;1m [drop tables] \033[39;49;0m"
-    psql -d astronomy -c "drop table galaxylj;drop table neighbors;drop table photoobjall;drop table photoprimarylj;drop table starlj;" >> run.log
-    echo `date`" end drop tables" >> run.log
-}
-
-# 删除旧的导入结果文件
-delLoadResFun(){
-	echo `date`" deleting monitor files" >> run.log
-	echo -e "\033[33;49;1m [deleting monitor files] \033[39;49;0m"
-	if [ -f "/tmp/monitor.txt" ]; then
-    	rm /tmp/monitor.txt
-	fi
-	if [ -f "./rec_load/galaxylj.txt" ]; then
-    	rm ./rec_load/galaxylj.txt
-	fi
-	if [ -f "./rec_load/photoobjall.txt" ]; then
-    	rm ./rec_load/photoobjall.txt
-	fi
-	if [ -f "./rec_load/photoprimarylj.txt" ]; then
-    	rm ./rec_load/photoprimarylj.txt
-	fi
-	if [ -f "./rec_load/starlj.txt" ]; then
-    	rm ./rec_load/starlj.txt
-	fi
-	if [ -f "./rec_load/neighbors.txt" ]; then
-    	rm ./rec_load/neighbors.txt
-	fi
-
-	for k in $(seq 1 6)
-	do
-ssh gpadmin@node${k} << eof
-if [ -f "/tmp/monitor${k}.txt" ]; then
-    rm /tmp/monitor${k}.txt
-fi
-eof
-	done
-}
-
-# 删除旧的查询结果文件
-delQueryResFun(){
-	echo `date`" deleting monitor files" >> run.log
-	echo -e "\033[33;49;1m [deleting monitor files] \033[39;49;0m"
-	if [ -f "/tmp/monitor.txt" ]; then
-    	rm /tmp/monitor.txt
-	fi
-	if [ -f "./rec_query/galaxylj.txt" ]; then
-    	rm ./rec_query/galaxylj.txt
-	fi
-	if [ -f "./rec_query/photoobjall.txt" ]; then
-    	rm ./rec_query/photoobjall.txt
-	fi
-	if [ -f "./rec_query/photoprimarylj.txt" ]; then
-	    rm ./rec_query/photoprimarylj.txt
-	fi
-	if [ -f "./rec_query/starlj.txt" ]; then
-    	rm ./rec_query/starlj.txt
-	fi
-
-for k in $(seq 1 6)
-do
-ssh gpadmin@node${k} << eof
-    if [ -f "/tmp/monitor${k}.txt" ]; then
-        rm /tmp/monitor${k}.txt
-    fi
-eof
-done
 }
 
 # 导入galaxylj表
@@ -642,13 +647,13 @@ queryStarlj_1_1(){
 
 # 查询表
 queryTableFun(){
-	cleanCacheFun
+	cleanCacheFun 
 	queryGalaxylj_1
 
 	cleanCacheFun
-	queryPhotoobjall_1
+	queryPhotoobjal_1
 
-	cleanCacheFun
+	cleanCacheFun 
 	queryPhotoprimarylj_1
 
 	cleanCacheFun
@@ -660,7 +665,7 @@ queryTableFun(){
 	cleanCacheFun
 	queryPhotoobjall_2
 
-	cleanCacheFun
+	cleanCacheFun 
 	queryPhotoprimarylj_2
 
 	cleanCacheFun
@@ -696,7 +701,7 @@ queryTableFun(){
 	cleanCacheFun
 	queryPhotoobjall_2_1
 
-	cleanCacheFun
+	cleanCacheFun 
 	queryPhotoobjall_3_1
 
 	cleanCacheFun
