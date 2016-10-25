@@ -642,28 +642,40 @@ queryStarlj_1_1(){
 
 # 查询表
 queryTableFun(){
+	cleanCacheFun
 	queryGalaxylj_1
 
+	cleanCacheFun
 	queryPhotoobjall_1
 
+	cleanCacheFun
 	queryPhotoprimarylj_1
 
+	cleanCacheFun
 	queryStarlj_1
 
+	cleanCacheFun
 	queryGalaxylj_2
 
+	cleanCacheFun
 	queryPhotoobjall_2
 
+	cleanCacheFun
 	queryPhotoprimarylj_2
 
+	cleanCacheFun
 	queryGalaxylj_3
 
+	cleanCacheFun
 	queryPhotoobjall_3
 
+	cleanCacheFun
 	queryGalaxylj_4
 
+	cleanCacheFun
 	queryPhotoobjall_4
 
+	cleanCacheFun
 	queryGalaxylj_5
 }
 
