@@ -117,43 +117,43 @@ if [ "$1" = "sg"  ]; then
         queryGalaxylj_2_1
     elif [ "$2" = "Q3" ]; then
 		queryGalaxylj_3
-    elif [ "$3" = "Q4" ]; then
+    elif [ "$2" = "Q4" ]; then
 		queryGalaxylj_4
-    elif [ "$4" = "Q5" ]; then
+    elif [ "$2" = "Q5" ]; then
 		queryGalaxylj_5
-    elif [ "$4" = "Q5-1" ]; then
+    elif [ "$2" = "Q5-1" ]; then
 		queryGalaxylj_5_1
-    elif [ "$4" = "Q5-2" ]; then
+    elif [ "$2" = "Q5-2" ]; then
 		queryGalaxylj_5_2
-    elif [ "$5" = "Q6" ]; then
+    elif [ "$2" = "Q6" ]; then
 		queryPhotoobjall_1
-    elif [ "$5" = "Q6-1" ]; then
+    elif [ "$2" = "Q6-1" ]; then
 		queryPhotoobjall_1_1
-    elif [ "$5" = "Q7" ]; then
+    elif [ "$2" = "Q7" ]; then
 		queryPhotoobjall_2
-    elif [ "$5" = "Q7-1" ]; then
+    elif [ "$2" = "Q7-1" ]; then
 		queryPhotoobjall_2_1
-    elif [ "$5" = "Q8" ]; then
+    elif [ "$2" = "Q8" ]; then
 		queryPhotoobjall_3
-    elif [ "$5" = "Q8-1" ]; then
+    elif [ "$2" = "Q8-1" ]; then
 		queryPhotoobjall_3_1
-    elif [ "$5" = "Q9" ]; then
+    elif [ "$2" = "Q9" ]; then
 		queryPhotoobjall_4
-    elif [ "$5" = "Q9-1" ]; then
+    elif [ "$2" = "Q9-1" ]; then
 		queryPhotoobjall_4_1
-    elif [ "$5" = "Q9-2" ]; then
+    elif [ "$2" = "Q9-2" ]; then
 		queryPhotoobjall_4_2
-    elif [ "$5" = "Q10" ]; then
+    elif [ "$2" = "Q10" ]; then
 		queryPhotoprimarylj_1
-    elif [ "$5" = "Q11" ]; then
+    elif [ "$2" = "Q11" ]; then
 		queryPhotoprimarylj_2
-    elif [ "$5" = "Q11-1" ]; then
+    elif [ "$2" = "Q11-1" ]; then
 		queryPhotoprimarylj_2_1
-    elif [ "$5" = "Q11-2" ]; then
+    elif [ "$2" = "Q11-2" ]; then
 		queryPhotoprimarylj_2_2
-    elif [ "$5" = "Q12" ]; then
+    elif [ "$2" = "Q12" ]; then
 		queryStarlj_1
-    elif [ "$5" = "Q12-1" ]; then
+    elif [ "$2" = "Q12-1" ]; then
 		queryStarlj_1
     else
         echo -e "\033[31;49;1m [query not exists] \033[39;49;0m"
