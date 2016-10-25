@@ -1,4 +1,4 @@
--- Q
+-- Q2-1
 -- count
 explain analyze SELECT 
 	count(*)

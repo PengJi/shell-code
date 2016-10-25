@@ -1,4 +1,4 @@
--- Q
+-- Q6-1
 -- order by
 explain analyze select 
 	objID,ra,dec 

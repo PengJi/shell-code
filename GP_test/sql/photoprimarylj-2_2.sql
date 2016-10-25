@@ -1,4 +1,4 @@
--- Q
+-- Q11-2
 -- exchange the order of join
 explain analyze SELECT 
 	P.objID 
