@@ -107,57 +107,58 @@ if [ "$1" = "sg"  ]; then
     if [ ! -d "./rec_query" ]; then
         mkdir ./rec_query
     fi  
-    if [ "$2" = "Q1" ]; then
-        queryGalaxylj_1		
-    elif [ "$2" = "Q1-1" ]; then
-        queryGalaxylj_1_1
-    elif [ "$2" = "Q2" ]; then
-        queryGalaxylj_2
-    elif [ "$2" = "Q2-1" ]; then
-        queryGalaxylj_2_1
-    elif [ "$2" = "Q3" ]; then
-		queryGalaxylj_3
-    elif [ "$2" = "Q4" ]; then
-		queryGalaxylj_4
-    elif [ "$2" = "Q5" ]; then
-		queryGalaxylj_5
-    elif [ "$2" = "Q5-1" ]; then
-		queryGalaxylj_5_1
-    elif [ "$2" = "Q5-2" ]; then
-		queryGalaxylj_5_2
-    elif [ "$2" = "Q6" ]; then
-		queryPhotoobjall_1
-    elif [ "$2" = "Q6-1" ]; then
-		queryPhotoobjall_1_1
-    elif [ "$2" = "Q7" ]; then
-		queryPhotoobjall_2
-    elif [ "$2" = "Q7-1" ]; then
-		queryPhotoobjall_2_1
-    elif [ "$2" = "Q8" ]; then
-		queryPhotoobjall_3
-    elif [ "$2" = "Q8-1" ]; then
-		queryPhotoobjall_3_1
-    elif [ "$2" = "Q9" ]; then
-		queryPhotoobjall_4
-    elif [ "$2" = "Q9-1" ]; then
-		queryPhotoobjall_4_1
-    elif [ "$2" = "Q9-2" ]; then
-		queryPhotoobjall_4_2
-    elif [ "$2" = "Q10" ]; then
-		queryPhotoprimarylj_1
-    elif [ "$2" = "Q11" ]; then
-		queryPhotoprimarylj_2
-    elif [ "$2" = "Q11-1" ]; then
-		queryPhotoprimarylj_2_1
-    elif [ "$2" = "Q11-2" ]; then
-		queryPhotoprimarylj_2_2
-    elif [ "$2" = "Q12" ]; then
-		queryStarlj_1
-    elif [ "$2" = "Q12-1" ]; then
-		queryStarlj_1
-    else
-        echo -e "\033[31;49;1m [query not exists] \033[39;49;0m"
-    fi  
+    case $2 in
+        "Q1") queryGalaxylj_1 
+        ;;  
+        "Q1-1") queryGalaxylj_1_1
+        ;;  
+        "Q2") queryGalaxylj_2
+        ;;  
+        "Q2-1") queryGalaxylj_2_1
+        ;;  
+        "Q3") queryGalaxylj_3
+        ;;  
+        "Q4") queryGalaxylj_4
+        ;;  
+        "Q5") queryGalaxylj_5
+        ;;  
+        "Q5-1") queryGalaxylj_5_1
+        ;;  
+        "Q5-2") queryGalaxylj_5_2
+        ;;  
+        "Q6") queryPhotoobjall_1
+        ;;  
+        "Q6-1") queryPhotoobjall_1_1
+        ;;  
+        "Q7") queryPhotoobjall_2
+        ;;  
+        "Q7-1") queryPhotoobjall_2_1 
+        ;;  
+        "Q8") queryPhotoobjall_3  
+        ;;
+        "Q8-1") queryPhotoobjall_3_1
+        ;;
+        "Q9") queryPhotoobjall_4
+        ;;
+        "Q9-1") queryPhotoobjall_4_1
+        ;;
+        "Q9-2") queryPhotoobjall_4_2
+        ;;
+        "Q10") queryPhotoprimarylj_1
+        ;;
+        "Q11") queryPhotoprimarylj_2
+        ;;
+        "Q11-1") queryPhotoprimarylj_2_1
+        ;;
+        "Q11-2") queryPhotoprimarylj_2_2
+        ;;
+        "Q12") queryStarlj_1
+        ;;
+        "Q12-1") queryStarlj_1_1
+        ;;
+        *) echo -e "\033[31;49;1m [query not exists] \033[39;49;0m"
+        ;;
+    esac
 fi
 
 # 查询数据

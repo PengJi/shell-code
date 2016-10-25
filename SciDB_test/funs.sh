@@ -518,29 +518,74 @@ queryStarlj_1_1(){
 
 # 表查询
 queryTableFun(){
+	cleanCacheFun
 	queryGalaxylj_1
 
+	cleanCacheFun
 	queryPhotoobjall_1
 
+	cleanCacheFun
 	queryPhotoprimarylj_1
 
+	cleanCacheFun
 	queryStarlj_1
 
+	cleanCacheFun
 	queryGalaxylj_2
 
+	cleanCacheFun
 	queryPhotoobjall_2
 
+	cleanCacheFun
 	queryPhotoprimarylj_2
 
+	cleanCacheFun
 	queryGalaxylj_3
 
+	cleanCacheFun
 	queryPhotoobjall_3
 
+	cleanCacheFun
 	queryGalaxylj_4
 
+	cleanCacheFun
 	queryPhotoobjall_4
 
+	cleanCacheFun
 	queryGalaxylj_5
+
+	cleanCacheFun
+	queryGalaxylj_1_1
+
+	cleanCacheFun
+	queryPhotoobjall_1_1
+
+	cleanCacheFun
+	queryPhotoprimarylj_2_1
+
+	cleanCacheFun
+	queryStarlj_1_1
+
+	cleanCacheFun
+	queryGalaxylj_2_1
+
+	cleanCacheFun
+	queryPhotoobjall_2_1
+
+	cleanCacheFun
+	queryPhotoprimarylj_2_2
+
+	cleanCacheFun
+	queryGalaxylj_5_1
+
+	cleanCacheFun
+	queryPhotoobjall_3_1
+
+	cleanCacheFun
+	queryPhotoprimarylj_2_1
+
+	cleanCacheFun
+	queryPhotoprimarylj_2_1
 }
 
 # 汇总结果
