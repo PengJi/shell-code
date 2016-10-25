@@ -33,7 +33,11 @@ createDirFun(){
 # 参数:
 # 集群中为各节点root的密码
 cleanCacheFun(){
-	passwd="$1"
+    if [ -n "${1}" ]; then
+        passwd="$1"
+    else
+        passwd="jipeng1008"
+    fi
 	echo `date`" start clear cache" >> run.log
 	echo -e "\033[32;49;1m [clear cache] \033[39;49;0m"
 expect << exp
