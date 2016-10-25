@@ -418,7 +418,7 @@ queryGalaxylj_4(){
 	echo -e "\033[32;49;1m [querying galaxylj-4] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q4" >> run.log
-	echo "Q5" >> ./rec_query/galaxylj.txt
+	echo "Q4" >> ./rec_query/galaxylj.txt
 	psql -d astronomy -f "./sql/galaxylj-4.sql" >> ./rec_query/galaxylj.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
@@ -677,6 +677,42 @@ queryTableFun(){
 
 	cleanCacheFun
 	queryGalaxylj_5
+
+	cleanCacheFun
+	queryGalaxylj_1_1
+
+	cleanCacheFun
+	queryGalaxylj_2_1
+
+	cleanCacheFun
+	queryGalaxylj_5_1
+
+	cleanCacheFun
+	queryGalaxylj_5_2
+
+	cleanCacheFun
+	queryPhotoobjall_1_1
+
+	cleanCacheFun
+	queryPhotoobjall_2_1
+
+	cleanCacheFun
+	queryPhotoobjall_3_1
+
+	cleanCacheFun
+	queryPhotoobjall_4_1
+
+	cleanCacheFun
+	queryPhotoobjall_4_2
+
+	cleanCacheFun
+	queryPhotoprimarylj_2_1
+
+	cleanCacheFun
+	queryPhotoprimarylj_2_2
+
+	cleanCacheFun
+	queryStarlj_1_1
 }
 
 # 汇总结果
