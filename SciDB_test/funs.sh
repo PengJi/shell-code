@@ -331,7 +331,7 @@ queryGalaxylj_5_2(){
     sleep 2
     echo `date`" Q5-2" >> run.log
     echo "Q5-2" >> ./rec_query/galaxylj.txt
-    iquery -f "./sql/galaxylj-5_2.sql" >> ./rec_query/galaxylj.txt
+    #iquery -f "./sql/galaxylj-5_2.sql" >> ./rec_query/galaxylj.txt
     sleep 2
     sh ./monitor/monitor_stop.sh
 }
