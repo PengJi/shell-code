@@ -15,7 +15,7 @@ doc
 
 # 清空集群中节点的缓存
 # 参数
-# 为各节点root的密码
+# 为各节点root的密码，存在默认密码
 cleanCacheFun(){
 	if [ -n "${1}" ]; then
 		passwd="$1"
@@ -351,7 +351,7 @@ loadneighborsFun(){
 
 # 导入所有表
 # 参数:
-# 数据大小：10、20、50、100
+# 数据大小：1、10、20、50、100
 loadTable(){
     # 导入galaxylj
 	loadGalaxyljFun $1
@@ -384,7 +384,6 @@ getTabeSizeFun(){
 	echo "neighbors size" >> ./rec_load/table_size.txt
 	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('neighbors'));" >> ./rec_load/table_size.txt
 }
-
 
 # Q1
 queryGalaxylj_1(){
