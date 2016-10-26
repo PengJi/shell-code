@@ -8,9 +8,20 @@ echo -e "\033[35;49;1m [program start] \033[39;49;0m"
 echo "************************************program start**************************************" >> run.log
 
 # 创建存放结果的目录
+mkdir ./1G
 mkdir ./10G
 mkdir ./20G
 mkdir ./50G
+
+# 导入和查询1G数据
+for k in $(seq 1 5 )
+do
+	./run.sh 1
+	mv ./rec_load ./rec_load-${k}
+	mv ./rec_query ./rec_query-${k}
+	mv ./rec_load-${k} ./1G
+	mv ./rec_query-${k} ./1G
+done
 
 # 导入和查询10G数据
 for k in $(seq 1 5 )
