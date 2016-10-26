@@ -340,6 +340,42 @@ queryGalaxylj_5_2(){
     sh ./monitor/monitor_stop.sh
 }
 
+# Q5-3
+queryGalaxylj_5_3(){
+    sh ./monitor/monitor_start.sh
+    echo -e "\033[32;49;1m [querying galaxylj-5_3] \033[39;49;0m"
+    sleep 2
+    echo `date`" Q5-3" >> run.log
+    echo "Q5-3" >> ./rec_query/galaxylj.txt
+    iquery -f "./sql/galaxylj-5_3.sql" >> ./rec_query/galaxylj.txt
+    sleep 2
+    sh ./monitor/monitor_stop.sh
+}
+
+# Q5-4
+queryGalaxylj_5_4(){
+    sh ./monitor/monitor_start.sh
+    echo -e "\033[32;49;1m [querying galaxylj-5_4] \033[39;49;0m"
+    sleep 2
+    echo `date`" Q5-4" >> run.log
+    echo "Q5-4" >> ./rec_query/galaxylj.txt
+    iquery -f "./sql/galaxylj-5_4.sql" >> ./rec_query/galaxylj.txt
+    sleep 2
+    sh ./monitor/monitor_stop.sh
+}
+
+# Q5-5
+queryGalaxylj_5_5(){
+    sh ./monitor/monitor_start.sh
+    echo -e "\033[32;49;1m [querying galaxylj-5_5] \033[39;49;0m"
+    sleep 2
+    echo `date`" Q5-5" >> run.log
+    echo "Q5-5" >> ./rec_query/galaxylj.txt
+    iquery -f "./sql/galaxylj-5_5.sql" >> ./rec_query/galaxylj.txt
+    sleep 2
+    sh ./monitor/monitor_stop.sh
+}
+
 # Q6
 queryPhotoobjall_1(){
     sh ./monitor/monitor_start.sh
@@ -479,7 +515,7 @@ queryPhotoprimarylj_2_1(){
     sleep 2
 	echo `date`" Q11-1" >> run.log
     echo "Q11-1" >> ./rec_query/photoprimarylj.txt
-    iquery -f "./sql/photoprimarylj-2_1.sql" >> ./rec_query/photoprimarylj.txt
+    #iquery -f "./sql/photoprimarylj-2_1.sql" >> ./rec_query/photoprimarylj.txt
     sleep 2
     sh ./monitor/monitor_stop.sh
 }
@@ -491,7 +527,7 @@ queryPhotoprimarylj_2_2(){
     sleep 2
 	echo `date`" Q11-2" >> run.log
     echo "Q11-2" >> ./rec_query/photoprimarylj.txt
-    iquery -f "./sql/photoprimarylj-2_2.sql" >> ./rec_query/photoprimarylj.txt
+    #iquery -f "./sql/photoprimarylj-2_2.sql" >> ./rec_query/photoprimarylj.txt
     sleep 2
     sh ./monitor/monitor_stop.sh
 }
