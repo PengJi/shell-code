@@ -31,7 +31,7 @@ createDirFun(){
 
 # 清空集群中各个节点的缓存
 # 参数:
-# 集群中为各节点root的密码
+# 集群中为各节点root的密码,存在默认密码为
 cleanCacheFun(){
     if [ -n "${1}" ]; then
         passwd="$1"
@@ -140,7 +140,6 @@ delTable(){
 	iquery -q "remove(StarLJ)";
 	iquery -q "remove(neighbors)";
 }
-
 
 # 导入GalaxyLJ表
 # 参数:
