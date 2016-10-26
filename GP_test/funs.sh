@@ -15,7 +15,7 @@ doc
 
 # 清空集群中节点的缓存
 # 参数
-# 为各节点root的密码
+# 为各节点root的密码，存在默认密码
 cleanCacheFun(){
 	if [ -n "${1}" ]; then
 		passwd="$1"
@@ -192,10 +192,22 @@ createTableFun(){
 mainFun(){
 	if [ -n "$1" ]
 	then
+		mkdir ./1G_$1
 		mkdir ./10G_$1
 		mkdir ./20G_$1
 		mkdir ./50G_$1
 	
+		# 导入和查询10G数据
+		for k in $(seq 1 5 )
+		do
+    		./run.sh 1
+	    	mv ./rec_load ./rec_load-${k}
+	    	mv ./rec_query ./rec_query-${k}
+		    mv ./rec_load-${k} ./1G_$1
+	    	mv ./rec_query-${k} ./1G_$1
+		done
+
+		# 导入和查询10G数据
 		for k in $(seq 1 5 )
 		do
     		./run.sh 10
@@ -205,6 +217,7 @@ mainFun(){
 	    	mv ./rec_query-${k} ./10G_$1
 		done
 
+		# 导入和查询20G数据
 		for k in $(seq 1 5 )
 		do
 	    	./run.sh 20
@@ -214,6 +227,7 @@ mainFun(){
 		    mv ./rec_query-${k} ./20G_$1
 		done
 
+		# 导入和查询50G数据
 		for k in $(seq 1 5 )
 		do
 	    	./run.sh 50
@@ -223,9 +237,22 @@ mainFun(){
 		    mv ./rec_query-${k} ./50G_$1
 		done
 	else
+		mkdir ./1G
         mkdir ./10G
         mkdir ./20G
         mkdir ./50G
+
+		# 导入和查询10G数据
+        for k in $(seq 1 5 )
+        do
+            ./run.sh 1
+            mv ./rec_load ./rec_load-${k}
+            mv ./rec_query ./rec_query-${k}
+            mv ./rec_load-${k} ./1G
+            mv ./rec_query-${k} ./1G
+        done
+
+		# 导入和查询10G数据
         for k in $(seq 1 5 )
         do
             ./run.sh 10
@@ -235,6 +262,7 @@ mainFun(){
             mv ./rec_query-${k} ./10G
         done
         
+		# 导入和查询20G数据
         for k in $(seq 1 5 )
         do
             ./run.sh 20
@@ -244,6 +272,7 @@ mainFun(){
             mv ./rec_query-${k} ./20G
         done
 
+		# 导入和查询50G数据
         for k in $(seq 1 5 )
         do
             ./run.sh 50
@@ -322,7 +351,7 @@ loadneighborsFun(){
 
 # 导入所有表
 # 参数:
-# 数据大小：10、20、50、100
+# 数据大小：1、10、20、50、100
 loadTable(){
     # 导入galaxylj
 	loadGalaxyljFun $1
@@ -355,7 +384,6 @@ getTabeSizeFun(){
 	echo "neighbors size" >> ./rec_load/table_size.txt
 	psql -d astronomy -c "select pg_size_pretty(pg_total_relation_size('neighbors'));" >> ./rec_load/table_size.txt
 }
-
 
 # Q1
 queryGalaxylj_1(){
