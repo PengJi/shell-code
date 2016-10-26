@@ -607,6 +607,15 @@ queryTableFun(){
     queryGalaxylj_5_2
 
     cleanCacheFun
+    queryGalaxylj_5_3
+
+    cleanCacheFun
+    queryGalaxylj_5_4
+
+    cleanCacheFun
+    queryGalaxylj_5_5
+
+    cleanCacheFun
     queryPhotoobjall_1_1
 
     cleanCacheFun
