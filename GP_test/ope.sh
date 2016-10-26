@@ -128,6 +128,12 @@ if [ "$1" = "sg"  ]; then
 		;;
 		"Q5-2") queryGalaxylj_5_2
 		;;
+		"Q5-3") queryGalaxylj_5_3
+		;;
+		"Q5-4") queryGalaxylj_5_4
+		;;
+		"Q5-5") queryGalaxylj_5_5
+		;;
 		"Q6") queryPhotoobjall_1
 		;;
 		"Q6-1") queryPhotoobjall_1_1
