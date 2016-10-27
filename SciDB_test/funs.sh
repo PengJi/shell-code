@@ -442,7 +442,7 @@ queryPhotoobjall_3_1(){
     sleep 2
     echo `date`" Q8-1" >> run.log
     echo "Q8-1" >> ./rec_query/photoobjall.txt
-    iquery -f "./sql/photoobjall-3_1.sql" >> ./rec_query/photoobjall.txt
+    #iquery -f "./sql/photoobjall-3_1.sql" >> ./rec_query/photoobjall.txt
     sleep 2
     sh ./monitor/monitor_stop.sh
 }
