@@ -3,7 +3,6 @@
 explain analyze SELECT 
 	g1.objID,g2.objID
 FROM 
-	GalaxyLJ AS g1 JOIN neighbors AS N ON g1.objID = N.objID JOIN GalaxyLJ AS g2 ON g2.objID = N.NeighborObjID 
 	GalaxyLJ AS g1 , neighbors AS N , GalaxyLJ AS g2
 WHERE
 	g1.objID = N.objID and g2.objID = N.NeighborObjID and
