@@ -583,7 +583,7 @@ queryPhotoobjall_3(){
 	echo -e "\033[32;49;1m [querying photoobjall-3] \033[39;49;0m"
 	sleep 2
 	echo `date`" Q8" >> run.log
-	echo "q8" >> ./rec_query/photoobjall.txt
+	echo "Q8" >> ./rec_query/photoobjall.txt
 	psql -d astronomy -f "./sql/photoobjall-3.sql" >> ./rec_query/photoobjall.txt
 	sleep 2 
 	sh ./monitor/monitor_stop.sh
