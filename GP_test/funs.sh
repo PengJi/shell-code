@@ -197,7 +197,7 @@ mainFun(){
 		mkdir ./20G_$1
 		mkdir ./50G_$1
 	
-		# 导入和查询10G数据
+		# 导入和查询1G数据
 		for k in $(seq 1 5 )
 		do
     		./run.sh 1
@@ -242,7 +242,7 @@ mainFun(){
         mkdir ./20G
         mkdir ./50G
 
-		# 导入和查询10G数据
+		# 导入和查询1G数据
         for k in $(seq 1 5 )
         do
             ./run.sh 1
