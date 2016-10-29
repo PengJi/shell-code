@@ -206,7 +206,7 @@ mainFun(){
 		    mv ./rec_load-${k} ./1G_$1
 	    	mv ./rec_query-${k} ./1G_$1
 		done
-
+:<<txt
 		# 导入和查询10G数据
 		for k in $(seq 1 5 )
 		do
@@ -236,6 +236,7 @@ mainFun(){
 		    mv ./rec_load-${k} ./50G_$1
 		    mv ./rec_query-${k} ./50G_$1
 		done
+txt
 	else
 		mkdir ./1G
         mkdir ./10G
@@ -251,7 +252,7 @@ mainFun(){
             mv ./rec_load-${k} ./1G
             mv ./rec_query-${k} ./1G
         done
-
+:<<txt
 		# 导入和查询10G数据
         for k in $(seq 1 5 )
         do
@@ -281,6 +282,7 @@ mainFun(){
             mv ./rec_load-${k} ./50G
             mv ./rec_query-${k} ./50G
         done
+txt
 	fi
 }
 
@@ -715,7 +717,7 @@ queryTableFun(){
 	queryGalaxylj_1
 
 	cleanCacheFun
-	queryPhotoobjal_1
+	queryPhotoobjall_1
 
 	cleanCacheFun 
 	queryPhotoprimarylj_1
