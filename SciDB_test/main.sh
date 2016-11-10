@@ -54,7 +54,7 @@ do
 done
 
 # 删除表
-delTable
+#delTable
 # 清空缓存
 cleanCacheFun
 
