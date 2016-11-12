@@ -14,8 +14,8 @@ colResFun --汇总结果
 doc
 
 # 清空集群中节点的缓存
-# 参数
-# 为各节点root的密码，存在默认密码
+# 参数:
+# 各节点root的密码，存在默认密码
 cleanCacheFun(){
 	if [ -n "${1}" ]; then
 		passwd="$1"
@@ -51,102 +51,6 @@ expect eof
 exp
 done
 	echo `date`" end clear cache" >> run.log
-}
-
-# 清空表
-# galaxylj/neighbors/photoobjall/photoprimarylj/starlj为5个表
-truncateTableFun(){
-	echo `date`" start truncate tables" >> run.log
-	echo -e "\033[32;49;1m [truncate tables] \033[39;49;0m"
-	psql -d astronomy -c "truncate galaxylj;truncate neighbors;truncate photoobjall;truncate photoprimarylj;truncate starlj;" >> run.log
-	echo `date`" end truncate tables" >> run.log
-}
-
-# 删除表
-dropTableFun(){
-	echo `date`" start drop tables" >> run.log
-    echo -e "\033[32;49;1m [drop tables] \033[39;49;0m"
-    psql -d astronomy -c "drop table galaxylj;drop table neighbors;drop table photoobjall;drop table photoprimarylj;drop table starlj;" >> run.log
-    echo `date`" end drop tables" >> run.log
-}
-
-# 删除旧的导入结果文件
-delLoadResFun(){
-	echo `date`" deleting monitor files" >> run.log
-	echo -e "\033[33;49;1m [deleting monitor files] \033[39;49;0m"
-	if [ -f "/tmp/monitor.txt" ]; then
-    	rm /tmp/monitor.txt
-	fi
-	if [ -f "./rec_load/galaxylj.txt" ]; then
-    	rm ./rec_load/galaxylj.txt
-	fi
-	if [ -f "./rec_load/photoobjall.txt" ]; then
-    	rm ./rec_load/photoobjall.txt
-	fi
-	if [ -f "./rec_load/photoprimarylj.txt" ]; then
-    	rm ./rec_load/photoprimarylj.txt
-	fi
-	if [ -f "./rec_load/starlj.txt" ]; then
-    	rm ./rec_load/starlj.txt
-	fi
-	if [ -f "./rec_load/neighbors.txt" ]; then
-    	rm ./rec_load/neighbors.txt
-	fi
-
-	for k in $(seq 1 6)
-	do
-ssh gpadmin@node${k} << eof
-if [ -f "/tmp/monitor${k}.txt" ]; then
-    rm /tmp/monitor${k}.txt
-fi
-eof
-	done
-}
-
-# 删除旧的查询结果文件
-delQueryResFun(){
-	echo `date`" deleting monitor files" >> run.log
-	echo -e "\033[33;49;1m [deleting monitor files] \033[39;49;0m"
-	if [ -f "/tmp/monitor.txt" ]; then
-    	rm /tmp/monitor.txt
-	fi
-	if [ -f "./rec_query/galaxylj.txt" ]; then
-    	rm ./rec_query/galaxylj.txt
-	fi
-	if [ -f "./rec_query/photoobjall.txt" ]; then
-    	rm ./rec_query/photoobjall.txt
-	fi
-	if [ -f "./rec_query/photoprimarylj.txt" ]; then
-	    rm ./rec_query/photoprimarylj.txt
-	fi
-	if [ -f "./rec_query/starlj.txt" ]; then
-    	rm ./rec_query/starlj.txt
-	fi
-
-for k in $(seq 1 6)
-do
-ssh gpadmin@node${k} << eof
-    if [ -f "/tmp/monitor${k}.txt" ]; then
-        rm /tmp/monitor${k}.txt
-    fi
-eof
-done
-}
-
-# 创建目录
-# rec_load 存放导入结果
-# rec_query 存放查询结果
-createDirFun(){
-	echo `date`" mkdir" >> run.log
-	echo -e "\033[32;49;1m [create dir] \033[39;49;0m"
-	if [ -d "./rec_load" ]; then
-    	rm -rf ./rec_load
-	fi
-	if [ -d "./rec_query" ]; then
-    	rm -rf ./rec_query
-	fi
-	mkdir ./rec_load
-	mkdir ./rec_query
 }
 
 # 创建表
@@ -186,6 +90,116 @@ createTableFun(){
 	fi
 }
 
+# 清空表
+# galaxylj/neighbors/photoobjall/photoprimarylj/starlj为5个表
+truncateTableFun(){
+	echo `date`" start truncate tables" >> run.log
+	echo -e "\033[32;49;1m [truncate tables] \033[39;49;0m"
+	psql -d astronomy -c "truncate galaxylj;truncate neighbors;truncate photoobjall;truncate photoprimarylj;truncate starlj;" >> run.log
+	echo `date`" end truncate tables" >> run.log
+}
+
+# 删除表
+dropTableFun(){
+	echo `date`" start drop tables" >> run.log
+    echo -e "\033[32;49;1m [drop tables] \033[39;49;0m"
+    psql -d astronomy -c "drop table galaxylj;drop table neighbors;drop table photoobjall;drop table photoprimarylj;drop table starlj;" >> run.log
+    echo `date`" end drop tables" >> run.log
+}
+
+# 创建目录
+# rec_load 存放导入结果
+# rec_query 存放查询结果
+createDirFun(){
+	echo `date`" mkdir" >> run.log
+	echo -e "\033[32;49;1m [create dir] \033[39;49;0m"
+	if [ -d "./rec_load" ]; then
+    	rm -rf ./rec_load
+	fi
+	if [ -d "./rec_query" ]; then
+    	rm -rf ./rec_query
+	fi
+	mkdir ./rec_load
+	mkdir ./rec_query
+}
+
+# 删除旧的导入结果文件
+# 参数：
+# 各节点的登陆用户名，默认为gpadmin
+delLoadResFun(){
+	echo `date`" deleting monitor files" >> run.log
+	echo -e "\033[33;49;1m [deleting monitor files] \033[39;49;0m"
+	if [ -f "/tmp/monitor.txt" ]; then
+    	rm /tmp/monitor.txt
+	fi
+	if [ -f "./rec_load/galaxylj.txt" ]; then
+    	rm ./rec_load/galaxylj.txt
+	fi
+	if [ -f "./rec_load/photoobjall.txt" ]; then
+    	rm ./rec_load/photoobjall.txt
+	fi
+	if [ -f "./rec_load/photoprimarylj.txt" ]; then
+    	rm ./rec_load/photoprimarylj.txt
+	fi
+	if [ -f "./rec_load/starlj.txt" ]; then
+    	rm ./rec_load/starlj.txt
+	fi
+	if [ -f "./rec_load/neighbors.txt" ]; then
+    	rm ./rec_load/neighbors.txt
+	fi
+
+	if [ -n "${1}" ]; then
+    	user="$1"
+	else
+    	user="gpadmin"
+	fi
+
+	for k in $(seq 1 6)
+	do
+ssh ${user}@node${k} << eof
+if [ -f "/tmp/monitor${k}.txt" ]; then
+    rm /tmp/monitor${k}.txt
+fi
+eof
+	done
+}
+
+# 删除旧的查询结果文件
+delQueryResFun(){
+	echo `date`" deleting monitor files" >> run.log
+	echo -e "\033[33;49;1m [deleting monitor files] \033[39;49;0m"
+	if [ -f "/tmp/monitor.txt" ]; then
+    	rm /tmp/monitor.txt
+	fi
+	if [ -f "./rec_query/galaxylj.txt" ]; then
+    	rm ./rec_query/galaxylj.txt
+	fi
+	if [ -f "./rec_query/photoobjall.txt" ]; then
+    	rm ./rec_query/photoobjall.txt
+	fi
+	if [ -f "./rec_query/photoprimarylj.txt" ]; then
+	    rm ./rec_query/photoprimarylj.txt
+	fi
+	if [ -f "./rec_query/starlj.txt" ]; then
+    	rm ./rec_query/starlj.txt
+	fi
+
+    if [ -n "${1}" ]; then
+        user="$1"
+    else
+        user="gpadmin"
+    fi 
+
+for k in $(seq 1 6)
+do
+ssh ${user}@node${k} << eof
+    if [ -f "/tmp/monitor${k}.txt" ]; then
+        rm /tmp/monitor${k}.txt
+    fi
+eof
+done
+}
+
 # 执行导入和查询
 # 参数:
 # 表的类型：a/ac/ao/aoc/空
@@ -206,7 +220,6 @@ mainFun(){
 		    mv ./rec_load-${k} ./1G_$1
 	    	mv ./rec_query-${k} ./1G_$1
 		done
-:<<txt
 		# 导入和查询10G数据
 		for k in $(seq 1 5 )
 		do
@@ -236,7 +249,6 @@ mainFun(){
 		    mv ./rec_load-${k} ./50G_$1
 		    mv ./rec_query-${k} ./50G_$1
 		done
-txt
 	else
 		mkdir ./1G
         mkdir ./10G
@@ -252,7 +264,6 @@ txt
             mv ./rec_load-${k} ./1G
             mv ./rec_query-${k} ./1G
         done
-:<<txt
 		# 导入和查询10G数据
         for k in $(seq 1 5 )
         do
@@ -282,7 +293,6 @@ txt
             mv ./rec_load-${k} ./50G
             mv ./rec_query-${k} ./50G
         done
-txt
 	fi
 }
 
@@ -796,16 +806,23 @@ queryTableFun(){
 }
 
 # 汇总结果
+# 参数：
+# 各节点的登陆用户，默认为：gpadmin
 colResFun(){
     echo `date`" scp files" >> run.log
     echo -e "\033[32;49;1m [scp files] \033[39;49;0m"
+    if [ -n "${1}" ]; then
+        user="$1"
+    else
+        user="gpadmin"
+    fi 
 for k in $(seq 1 6)
 do
 echo `date`" worker${k} scp" >> run.log
 echo -e "\033[33;49;1m [node${k} scp] \033[39;49;0m"
-ssh gpadmin@node${k} << eof
+ssh ${user}@node${k} << eof
 if [ -f "/tmp/monitor${k}.txt" ]; then
-    scp -o StrictHostKeyChecking=no /tmp/monitor${k}.txt gpadmin@JPDB2:/tmp 
+    scp -o StrictHostKeyChecking=no /tmp/monitor${k}.txt ${user}@JPDB2:/tmp 
 fi
 eof
 done
