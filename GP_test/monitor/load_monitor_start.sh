@@ -5,7 +5,7 @@ doc
 
 echo -e "\033[33;49;1m [JPDB2 start] \033[39;49;0m"
 
-ssh gpadmin@JPDB2 << eof
+ssh ${1}@JPDB2 << eof
 echo "******************************************************************************************************************************" >> /tmp/monitor.txt
 collectl -scmdn -oT -i3 >> /tmp/monitor.txt &
 eof
@@ -13,7 +13,7 @@ eof
 for k in $(seq 1 6)
 do
 echo -e "\033[33;49;1m [node${k} start] \033[39;49;0m"
-ssh gpadmin@node${k} << eof
+ssh ${1}@node${k} << eof
 echo "******************************************************************************************************************************" >> /tmp/monitor${k}.txt
 collectl -scmdn -oT -i3 >> /tmp/monitor${k}.txt &
 eof

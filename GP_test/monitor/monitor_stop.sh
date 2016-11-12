@@ -5,7 +5,7 @@ pgrep collectl | xargs kill -9
 for k in $(seq 1 6)
 do
 echo -e "\033[31;49;1m [node${k} stop] \033[39;49;0m"
-ssh gpadmin@node${k} << eof
+ssh ${1}@node${k} << eof
   pgrep collectl | xargs kill -9
 eof
 done
